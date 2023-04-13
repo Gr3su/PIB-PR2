@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 /**
  * Beschreiben Sie hier die Klasse Raum.
  *
@@ -34,6 +36,7 @@ public class Raum
         return reservierungen.getByIndex(index);
     }
 
+    @Override
     public String toString(){
         String buchung     = "Raum" + geb +"-" + etage + "." + raum + "\n";
         StringBuilder raum = new StringBuilder(buchung);
@@ -41,5 +44,20 @@ public class Raum
             raum.append(reservierungen.getByIndex(i));
         }
         return raum.toString();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj){
+            return true;
+        }
+        if (obj == null){
+            return false;
+        }
+        if(! (obj instanceof Raum)){
+            return false;
+        }
+        Raum tmp = (Raum) obj;
+        return geb == tmp.getGeb() && etage == tmp.getEtage() && raum == tmp.getRaum();
     }
 }

@@ -38,6 +38,25 @@ public class Mitarbeiter extends Person
 
     @Override
     public String toString(){
-        return vorname + " " + nachname + " (" + email + ")";
+        return super.toString() + " (" + email + ")";
+    }
+
+    @Override
+    public boolean equals(Object obj){
+        if(!super.equals(obj)){
+            return false;
+        }
+        if(obj == this){
+            return true;
+        }
+
+        if(obj instanceof Mitarbeiter){
+            Mitarbeiter tmp = (Mitarbeiter)obj;
+            if(tmp.getEmail().equals(this.email)){
+                return false;
+            }
+            return true;
+        }
+        return false;
     }
 }

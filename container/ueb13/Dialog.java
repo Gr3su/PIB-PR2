@@ -5,9 +5,7 @@
  * @version 12.04.2023 / 19:41Uhr
  */
 
-import java.lang.reflect.Array;
 import java.util.Scanner;
-import java.util.ArrayList;
 
 public final class Dialog {
 
