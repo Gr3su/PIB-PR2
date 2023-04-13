@@ -1,21 +1,21 @@
 public class List{
     private Reservierung [] list;
     private int anzahl;
-    private static final int INIT_LENGTH;
+    private static final int INIT_LENGTH = 5;
 
     public List(){
         this.list = new Reservierung[INIT_LENGTH];
         this.anzahl = 0;
     }
 
-    public add(Reservierung tmp){
+    public void addReservierung(Reservierung tmp){
         checkLength();
         list[anzahl++] = tmp;
     }
 
-    public getByIndex(int index){
+    public Reservierung getByIndex(int index){
         if(index < 0 || index > anzahl){
-            throw new ArrayIndexOutOfBounds();
+            throw new IllegalArgumentException();
         }
 
         return list[index];
@@ -25,7 +25,7 @@ public class List{
         return anzahl;
     }
 
-    public checkLength(){
+    public void checkLength(){
         if(anzahl == list.length - 1){
             Reservierung [] tmp = new Reservierung[list.length * 2];
             for(int i = 0; i < anzahl; i++){

@@ -62,7 +62,9 @@ public final class Dialog {
     private static final String     EINGABE_GEBAEUDE        = "Bitte gebe die Gebaeude-Nummer ein:\n";
     private static final String     EINGABE_ETAGE           = "Bitte gebe die Etage ein:\n";
     private static final String     EINGABE_RAUMNUMMER      = "Bitte gebe die Raum-Nummer ein:\n";
-
+    private static final String     EINGABE_BEGINN          = "Bitte gebe den Beginn der Reservierung ein:\n";
+    private static final String     EINGABE_ENDE            = "Bitte gebe das Ende der Reservierung ein:\n";
+    
     //Attributes
     private Scanner scanner;
     private boolean killProgram;
@@ -70,6 +72,7 @@ public final class Dialog {
     private byte mitarbeiterAnzahl;
     private Raum [] raeume;
     private byte raumAnzahl;
+    
 
     private Dialog(){
         this.scanner = new Scanner(System.in);
@@ -143,7 +146,7 @@ public final class Dialog {
                     String nachname = readString(EINGABE_NACHNAME);
                     String email = readString(EINGABE_EMAIL);
 
-                    mitarbeiter[mitarbeiterAnzahl++] = new Mitarbeiter(vorname, nachname, email);
+                    mitarbeiterListe[mitarbeiterAnzahl++] = new Mitarbeiter(vorname, nachname, email);
                     break;
 
                 case 2:
@@ -180,7 +183,7 @@ public final class Dialog {
                     return;
 
                 default:
-                    throw new IllegalArgumentException(ERROR_OPTION_INVALID)
+                    throw new IllegalArgumentException(ERROR_OPTION_INVALID);
 
             }
         }
@@ -201,8 +204,11 @@ public final class Dialog {
                         throw new IllegalArgumentException(ERROR_KEIN_RAUM);
                     }
 
-                    int beginn = readInt(EINGABE_RESERV_BEGINN);
-                    int ende = readInt(EINGABE_RESERV_ENDE);
+                    System.out.println(EINGABE_BEGINN);
+                    Uhrzeit beginn = uhrzeitErstellen();
+                    System.out.println(EINGABE_ENDE);
+                    Uhrzeit ende = uhrzeitErstellen();
+                    
                     reservierung = new Reservierung(beginn, ende);
                     break;
 
@@ -228,7 +234,7 @@ public final class Dialog {
                         System.err.println(ERROR_KEINE_RESERV);
                         break;
                     }
-                    reservierung.setRaum(raumAuswahl());
+                    //reservierung.setRaum(raumAuswahl());
                     break;
 
                 case 5:
@@ -291,7 +297,7 @@ public final class Dialog {
                     return;
 
                 default:
-                    throw new IllegalArgumentException(ERROR_OPTION_INVALID)
+                    throw new IllegalArgumentException(ERROR_OPTION_INVALID);
             }
         }
     }
@@ -306,20 +312,6 @@ public final class Dialog {
     private Mitarbeiter mitarbeiterAuswahl(){
 
         for(int i = 0; i < mitarbeiterAnzahl; i++){
-            System.out.println(i + raeume[i].toString());
-        }
-        byte input = readByte(EINGABE_RAUM);
-
-        if(input < 0 || input >= raumAnzahl){
-            throw new IllegalArgumentException(ERROR_OPTION_INVALID);
-        }
-
-        return raeume[input];
-    }
-
-    private Raum raumAuswahl(){
-
-        for(int i = 0; i < raumAnzahl; i++){
             System.out.println(i + mitarbeiterListe[i].toString());
         }
         byte input = readByte(EINGABE_MITARBEITER);
@@ -329,6 +321,20 @@ public final class Dialog {
         }
 
         return mitarbeiterListe[input];
+    }
+
+    private Raum raumAuswahl(){
+
+        for(int i = 0; i < raumAnzahl; i++){
+            System.out.println(i + raeume[i].toString());
+        }
+        byte input = readByte(EINGABE_RAUM);
+
+        if(input < 0 || input >= raumAnzahl){
+            throw new IllegalArgumentException(ERROR_OPTION_INVALID);
+        }
+
+        return raeume[input];
     }
 
     /**

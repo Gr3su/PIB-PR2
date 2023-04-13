@@ -29,17 +29,17 @@ public class Raum
         return raum;
     }
     public void addReservierung(Reservierung reservierung){
-        reservierungen.add(reservierung);
+        reservierungen.addReservierung(reservierung);
     }
     public Reservierung getReservierung(int index){
-       return reservierungen[index];
+       return reservierungen.getByIndex(index);
     }
     
     public String toString(){
         String buchung     = "Raum" + geb +"-" + etage + "." + raum + "/n";
         StringBuilder raum = new StringBuilder(buchung);
-        for(int i = 0; i < reservierungen.getAnzahl; i++){
-            raum.add(reservierungen.getByIndex(i));    
+        for(int i = 0; i < reservierungen.getAnzahl(); i++){
+            raum.append(reservierungen.getByIndex(i));    
             }
         return raum.toString();
     }
