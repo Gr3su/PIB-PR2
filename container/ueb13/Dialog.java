@@ -1,9 +1,9 @@
 /**
-* Dialogklasse zum testen der Uebung 13.
-*
-* @author Yannick Gross / Tim Mueller
-* @version 12.04.2023 / 19:41Uhr
-*/
+ * Dialogklasse zum testen der Uebung 13.
+ *
+ * @author Yannick Gross / Tim Mueller
+ * @version 12.04.2023 / 19:41Uhr
+ */
 
 import java.lang.reflect.Array;
 import java.util.Scanner;
@@ -18,33 +18,37 @@ public final class Dialog {
     private static final String     ERROR_MAX_MITARBEITER   = "Maximale Anzahl (20) an Mitarbeitern erreicht.\n";
     private static final String     ERROR_MAX_RAEUME        = "Maximale Anzahl (20) an Raeumen erreicht.\n";
     private static final String     ERROR_KEIN_MITARBEITER  = "Es wurde noch kein Mitarbeiter erstellt," +
-                                                                " bitte zuerst einen erstellen.\n";
+            " bitte zuerst einen erstellen.\n";
     private static final String     ERROR_KEIN_RAUM         = "Es wurde noch kein Raum erstellt," +
-                                                                " bitte zuerst einen erstellen.\n";
+            " bitte zuerst einen erstellen.\n";
     private static final String     ERROR_KEINE_RESERV      = "Es wurde noch keine Reservierung angelegt," +
-                                                                " bitte zuerst eine anlegen.\n";
+            " bitte zuerst eine anlegen.\n";
 
     //Prompts
     private static final String     WELCOME_MESSAGE         = "Willkommen beim Test-Dialog fuer Uebung 13." +
-                                                                " Waehle aus dem Menue heraus:\n";
+            " Waehle aus dem Menue heraus:\n";
 
-    private static final String     MAIN_MENUE              =   "1 - Uhrzeit Menue\n" +
+    private static final String     MAIN_MENUE              =   "#=# MAIN-Menue #=#\n" +
+                                                                "1 - Uhrzeit Menue\n" +
                                                                 "2 - Mitarbeiter Menue\n" +
                                                                 "3 - Reservierung Menue\n" +
                                                                 "4 - Raum Menue\n" +
                                                                 "5 - Dialog beenden";
-    private static final String     MITARBEITER_MENUE       =   "1 - Mitarbeiter anlegen\n" +
+    private static final String     MITARBEITER_MENUE       =   "#=# MITARBEITER-Menue #=#\n" +
+                                                                "1 - Mitarbeiter anlegen\n" +
                                                                 "2 - Reservieren\n" +
                                                                 "3 - toString()\n" +
                                                                 "4 - Mitarbeiterliste\n" +
                                                                 "5 - Main Menue";
-    private static final String     RESERVIERUNG_MENUE      =   "1 - Reservierung erstellen\n" +
+    private static final String     RESERVIERUNG_MENUE      =   "#=# RESERVIERUNG-Menue #=#\n" +
+                                                                "1 - Reservierung erstellen\n" +
                                                                 "2 - Bemerkung aendern\n" +
                                                                 "3 - Mitarbeiter aendern\n" +
                                                                 "4 - Raum aendern\n" +
                                                                 "5 - toString()\n" +
                                                                 "6 - Reservierung beenden";
-    private static final String     RAUM_MENUE              =   "1 - Raum erstellen\n" +
+    private static final String     RAUM_MENUE              =   "#=# RAUM-Menue #=#\n" +
+                                                                "1 - Raum erstellen\n" +
                                                                 "2 - Reservierung hinzufuegen\n" +
                                                                 "3 - toString()\n" +
                                                                 "4 - getReservierung(index)\n" +
@@ -64,7 +68,8 @@ public final class Dialog {
     private static final String     EINGABE_RAUMNUMMER      = "Bitte gebe die Raum-Nummer ein:\n";
     private static final String     EINGABE_BEGINN          = "Bitte gebe den Beginn der Reservierung ein:\n";
     private static final String     EINGABE_ENDE            = "Bitte gebe das Ende der Reservierung ein:\n";
-    
+    private static final String     EINGABE_INDEX           = "Bitte gebe deinen gewuenschten Index ein:\n";
+
     //Attributes
     private Scanner scanner;
     private boolean killProgram;
@@ -72,7 +77,7 @@ public final class Dialog {
     private byte mitarbeiterAnzahl;
     private Raum [] raeume;
     private byte raumAnzahl;
-    
+
 
     private Dialog(){
         this.scanner = new Scanner(System.in);
@@ -121,7 +126,7 @@ public final class Dialog {
                 }
             }
             catch(Exception e){
-
+                System.err.println(e.getMessage());
             }
         }
     }
@@ -132,7 +137,7 @@ public final class Dialog {
     }
 
     public void mitarbeiterMenue(){
-        
+
         while(true){
             byte input = readByte(MITARBEITER_MENUE);
 
@@ -169,7 +174,7 @@ public final class Dialog {
                     if(mitarbeiterAnzahl == 0){
                         throw new IllegalArgumentException(ERROR_KEIN_MITARBEITER);
                     }
-                    mitarbeiterAuswahl().toString();
+                    System.out.println(mitarbeiterAuswahl().toString());
                     break;
 
                 case 4:
@@ -208,7 +213,7 @@ public final class Dialog {
                     Uhrzeit beginn = uhrzeitErstellen();
                     System.out.println(EINGABE_ENDE);
                     Uhrzeit ende = uhrzeitErstellen();
-                    
+
                     reservierung = new Reservierung(beginn, ende);
                     break;
 
@@ -290,7 +295,9 @@ public final class Dialog {
                     break;
 
                 case 4:
-                    //Noch zu implementieren getReservierung(int index)
+                    Raum indexRaum = raumAuswahl();
+                    int index = readInt(EINGABE_INDEX);
+                    System.out.println(indexRaum.getReservierung(index));
                     break;
 
                 case 5:
@@ -312,7 +319,7 @@ public final class Dialog {
     private Mitarbeiter mitarbeiterAuswahl(){
 
         for(int i = 0; i < mitarbeiterAnzahl; i++){
-            System.out.println(i + mitarbeiterListe[i].toString());
+            System.out.println(i + " - " + mitarbeiterListe[i].toString());
         }
         byte input = readByte(EINGABE_MITARBEITER);
 
@@ -326,7 +333,7 @@ public final class Dialog {
     private Raum raumAuswahl(){
 
         for(int i = 0; i < raumAnzahl; i++){
-            System.out.println(i + raeume[i].toString());
+            System.out.println(i + " - " + raeume[i].toString());
         }
         byte input = readByte(EINGABE_RAUM);
 
@@ -345,7 +352,7 @@ public final class Dialog {
      */
     private String readString(String prompt){
         System.out.println(prompt);
-        return scanner.nextLine();
+        return scanner.next();
     }
 
     /**
@@ -361,8 +368,9 @@ public final class Dialog {
             System.out.println(ERROR_BYTE_NEEDED);
             scanner.next();
         }
-
-        return scanner.nextByte();
+        byte tmp = scanner.nextByte();
+        scanner.nextLine();
+        return tmp;
     }
 
     /**
@@ -378,8 +386,9 @@ public final class Dialog {
             System.out.println(ERROR_INT_NEEDED);
             scanner.next();
         }
-
-        return scanner.nextInt();
+        int tmp = scanner.nextInt();
+        scanner.nextLine();
+        return tmp;
     }
 
     public static void main(String [] args){
