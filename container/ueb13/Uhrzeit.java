@@ -31,6 +31,29 @@ public class Uhrzeit
     public int getStunde(){
         return stunde;
     }
+    
+    @Override
+    public boolean equals(Object obj){
+        
+        if(obj == null){
+            return false;
+        }
+        
+        if(obj == this){
+            return true;
+        }
+        
+        if(obj instanceof Uhrzeit){
+            Uhrzeit tmp = (Uhrzeit)obj;
+            if(tmp.getMinute() == (this.minute) && 
+              (tmp.getStunde() == (this.stunde))){
+                return false;    
+            }
+            return true;
+        }
+        return true;
+    }
+
 
     public String toString(){
 
@@ -53,4 +76,5 @@ public class Uhrzeit
 
         return stundeString + ":" + minuteString + " Uhr";
     }
+    
 }
