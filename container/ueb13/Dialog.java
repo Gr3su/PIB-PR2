@@ -1,5 +1,5 @@
 /**
- * Dialogklasse zum testen der Uebung 13.
+ * Dialogklasse zum Testen der Uebung 13.
  *
  * @author Yannick Gross / Tim Mueller
  * @version 12.04.2023 / 19:41Uhr
@@ -69,7 +69,7 @@ public final class Dialog {
     private static final String     EINGABE_INDEX           = "Bitte gebe deinen gewuenschten Index ein:\n";
 
     //Attributes
-    private Scanner scanner;
+    private final Scanner scanner;
     private boolean killProgram;
     private Mitarbeiter [] mitarbeiterListe;
     private byte mitarbeiterAnzahl;
@@ -90,7 +90,7 @@ public final class Dialog {
      * Kuemmert sich um das Hauptmenue und dem Abfangen von auftretenden Fehlern.
      */
     public void start(){
-        int input = -1;
+        int input;
 
         System.out.println(WELCOME_MESSAGE);
 
@@ -129,11 +129,18 @@ public final class Dialog {
         }
     }
 
+    /**
+     * Managed die Möglichkeit eine Uhrzeit zu erstellen und fuehrt dann die toString() Methode auf das
+     * Objekt aus.
+     */
     public void uhrzeitMenue(){
         Uhrzeit uhrzeit = uhrzeitErstellen();
         System.out.println("toString()-Test: " + uhrzeit);
     }
 
+    /**
+     * Managed das Menue um die Klasse Mitarbeiter zu testen.
+     */
     public void mitarbeiterMenue(){
 
         while(true){
@@ -192,6 +199,11 @@ public final class Dialog {
         }
     }
 
+    /**
+     * Managed das Menue um die Klasse Reservierung zu testen und zu nutzen.
+     *
+     * @return erstelltes Reservierungs Objekt
+     */
     public Reservierung reservierungMenue(){
         Reservierung reservierung = null;
 
@@ -257,6 +269,9 @@ public final class Dialog {
         }
     }
 
+    /**
+     * Managed das Menue um die Klasse Raum zu testen.
+     */
     public void raumMenue(){
 
         while(true){
@@ -307,6 +322,11 @@ public final class Dialog {
         }
     }
 
+    /**
+     * Nimmt Eingaben vom User um eine Uhrzeit zu erstellen.
+     *
+     * @return Uhrzeit Objekt
+     */
     private Uhrzeit uhrzeitErstellen(){
         byte stunden = readByte(EINGABE_STUNDEN);
         byte minuten = readByte(EINGABE_MINUTEN);
@@ -314,6 +334,11 @@ public final class Dialog {
         return new Uhrzeit(stunden, minuten);
     }
 
+    /**
+     * Printed eine Liste der Mitarbeiter und laesst den User einen davon auswaehlen.
+     *
+     * @return ausgewaehlter User
+     */
     private Mitarbeiter mitarbeiterAuswahl(){
 
         for(int i = 0; i < mitarbeiterAnzahl; i++){
@@ -328,6 +353,11 @@ public final class Dialog {
         return mitarbeiterListe[input];
     }
 
+    /**
+     * Printed eine Liste der Raeume und laesst den User einen davon auswaehlen.
+     *
+     * @return ausgewaehlter Raum
+     */
     private Raum raumAuswahl(){
 
         for(int i = 0; i < raumAnzahl; i++){
