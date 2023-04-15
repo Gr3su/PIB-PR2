@@ -4,12 +4,14 @@
  * @author (Ihr Name)
  * @version (eine Versionsnummer oder ein Datum)
  */
-public class Uhrzeit
-{
+public class Uhrzeit {
+    //Prompts
+    private static final String ERROR_STUNDE = "Stunden müssen im bereich von 0-23 geweahlt werden.\n";
+    private static final String ERROR_MINUTE = "Minuten müssen im bereich von 0-59 geweahlt werden.\n";
+
+    //Attributes
     private int stunde;
     private int minute;
-    private final String ERROR_STUNDE = "Stunden müssen im bereich von 0-23 geweahlt werden";
-    private final String ERROR_MINUTE = "Minuten müssen im bereich von 0-59 geweahlt werden";
 
     public Uhrzeit(int stunde, int minute){
         if (stunde < 0 || stunde > 23){
@@ -45,33 +47,25 @@ public class Uhrzeit
         
         if(obj instanceof Uhrzeit){
             Uhrzeit tmp = (Uhrzeit)obj;
-            if(tmp.getMinute() == (this.minute) && 
+            if(tmp.getMinute() == (this.minute) &&
               (tmp.getStunde() == (this.stunde))){
-                return false;    
+                return true;
             }
-            return true;
         }
-        return true;
+        return false;
     }
 
-
+    @Override
     public String toString(){
 
-        String minuteString;
-        String stundeString;
+        String minuteString = String.valueOf(minute);
+        String stundeString = String.valueOf(stunde);
 
         if(minute < 10){
             minuteString = "0" + minute;
         }
-        else{
-            minuteString = "" + minute;
-        }
         if(stunde < 10){
             stundeString = "0" + stunde;
-        }
-        else{
-            stundeString = "" + stunde;
-
         }
 
         return stundeString + ":" + minuteString + " Uhr";

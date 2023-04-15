@@ -160,10 +160,6 @@ public final class Dialog {
                     break;
 
                 case 2:
-                    if(mitarbeiterAnzahl == 0){
-                        throw new IllegalArgumentException(ERROR_KEIN_MITARBEITER);
-                    }
-
                     Mitarbeiter tmpMitarb = mitarbeiterAuswahl();
                     Raum tmpRaum = raumAuswahl();
                     System.out.println(EINGABE_RESERV_BEGINN);
@@ -176,9 +172,6 @@ public final class Dialog {
                     break;
 
                 case 3:
-                    if(mitarbeiterAnzahl == 0){
-                        throw new IllegalArgumentException(ERROR_KEIN_MITARBEITER);
-                    }
                     System.out.println(mitarbeiterAuswahl().toString());
                     break;
 
@@ -212,13 +205,6 @@ public final class Dialog {
 
             switch(input){
                 case 1:
-                    if(mitarbeiterAnzahl == 0){
-                        throw new IllegalArgumentException(ERROR_KEIN_MITARBEITER);
-                    }
-                    if(raumAnzahl == 0){
-                        throw new IllegalArgumentException(ERROR_KEIN_RAUM);
-                    }
-
                     System.out.println(EINGABE_BEGINN);
                     Uhrzeit beginn = uhrzeitErstellen();
                     System.out.println(EINGABE_ENDE);
@@ -291,19 +277,11 @@ public final class Dialog {
                     break;
 
                 case 2:
-                    if(raumAnzahl == 0){
-                        throw new IllegalArgumentException(ERROR_KEIN_RAUM);
-                    }
-
                     Raum tmpRaum = raumAuswahl();
                     tmpRaum.addReservierung(reservierungMenue());
                     break;
 
                 case 3:
-                    if(raumAnzahl == 0){
-                        throw new IllegalArgumentException(ERROR_KEIN_RAUM);
-                    }
-
                     System.out.println(raumAuswahl());
                     break;
 
@@ -340,6 +318,9 @@ public final class Dialog {
      * @return ausgewaehlter User
      */
     private Mitarbeiter mitarbeiterAuswahl(){
+        if(mitarbeiterAnzahl == 0){
+            throw new IllegalArgumentException(ERROR_KEIN_MITARBEITER);
+        }
 
         for(int i = 0; i < mitarbeiterAnzahl; i++){
             System.out.println(i + " - " + mitarbeiterListe[i].toString());
@@ -359,6 +340,9 @@ public final class Dialog {
      * @return ausgewaehlter Raum
      */
     private Raum raumAuswahl(){
+        if(raumAnzahl == 0){
+            throw new IllegalArgumentException(ERROR_KEIN_RAUM);
+        }
 
         for(int i = 0; i < raumAnzahl; i++){
             System.out.println(i + " - " + raeume[i].toString());

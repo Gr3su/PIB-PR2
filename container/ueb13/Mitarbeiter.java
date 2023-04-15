@@ -4,31 +4,32 @@
  * @author (Ihr Name)
  * @version (eine Versionsnummer oder ein Datum)
  */
-public class Mitarbeiter extends Person
+public class Mitarbeiter extends Person{
+    //Prompts
+    private static final String     ERROR_EMAIL_LEER    = "E-Mail darf nicht leer sein.\n";
 
-{
+    //Attributes
     private String email;
-    private String vorname;
-    private String nachname;
 
 
-    public Mitarbeiter(String vorname, String nachname, String email){
+    public Mitarbeiter(String vorname, String nachname, String email) {
         super(vorname, nachname);
 
-        this.vorname  = vorname.strip();
-        this.nachname = nachname.strip();
-        this.email    = email.strip();
+        if(email.isBlank()){
+            throw new IllegalArgumentException(ERROR_EMAIL_LEER);
+        }
+        setEmail(email);
+    }
 
-
-    }
-    public String getVorname(){
-        return vorname;
-    }
-    public String getNachname(){
-        return nachname;
-    }
     public String getEmail(){
         return email;
+    }
+    public void setEmail(String email){
+        if(email == null || email.isBlank()){
+            throw new IllegalArgumentException(ERROR_EMAIL_LEER);
+        }
+
+        this.email = email;
     }
 
     public void reserviere(Raum raum, Uhrzeit beginn, Uhrzeit ende, String bemerkung){
