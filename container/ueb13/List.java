@@ -32,7 +32,7 @@ public class List{
      * @return Reservierung an Stelle index.
      */
     public Reservierung getByIndex(int index){
-        if(index < 0 || index > anzahl){
+        if(index < 0 || index >= anzahl){
             throw new ArrayIndexOutOfBoundsException(ERROR_INDEX_FALSE);
         }
 
