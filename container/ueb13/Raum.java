@@ -21,17 +21,16 @@ public class Raum {
     * @param geb Gebaeude des Raumes.
     * @param etage Etage des Raumes.
     * @param raum Raum-Nummer des Raumes.
-    * @param reservierungen Liste alle reservierungen des Raumes.
      
     * @throws IllegalArgumentException wenn der eingegebene Wert des Gebaeudes negativ ist.
     * @throws IllegalArgumentException wenn der eingegebene Wert des Raumes negativ ist.
     */
     public Raum(int geb, int etage, int raum){
         if(geb < 0){
-            throw new IllegalArgumentException(ERROR_GEB_NEGATIV);
+            throw new ExpectedException(ERROR_GEB_NEGATIV);
         }
         if(raum < 0){
-            throw new IllegalArgumentException(ERROR_RAUM_NEGATIV);
+            throw new ExpectedException(ERROR_RAUM_NEGATIV);
         }
 
         this.geb   = geb;
@@ -39,6 +38,7 @@ public class Raum {
         this.raum  = raum;
         this.reservierungen = new List();
     }
+
     /**
      * Gibt das Gebaeude des Raumes zurueck.
      *
@@ -47,6 +47,7 @@ public class Raum {
     public int getGeb(){
         return geb;
     }
+
     /**
      * Gibt die Etage des Raumes zurueck.
      * 
@@ -55,6 +56,7 @@ public class Raum {
     public int getEtage(){
         return etage;
     }
+
     /**
      * Gibt die Raum-Nummer des Raumes zurueck.
      *
@@ -63,6 +65,7 @@ public class Raum {
     public int getRaum(){
         return raum;
     }
+
     /**
      * Fuegt eine Reservierung zu einem Raum hinzu.
      *
@@ -70,6 +73,7 @@ public class Raum {
     public void addReservierung(Reservierung reservierung){
         reservierungen.addReservierung(reservierung);
     }
+
     /**
      * Gibt eine Reservierung zurueck.
      *
@@ -86,7 +90,7 @@ public class Raum {
      */
     @Override
     public String toString(){
-        String buchung     = "Raum" + geb +"-" + etage + "." + raum + "\n";
+        String buchung     = "Raum " + geb +"-" + etage + "." + raum + "\n";
 
         return buchung + reservierungen;
     }

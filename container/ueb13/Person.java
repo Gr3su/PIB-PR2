@@ -21,10 +21,10 @@ public class Person {
      */
     public Person(String vorname, String nachname) {
         if(vorname == null || vorname.isBlank()){
-            throw new IllegalArgumentException(ERROR_VORNAME_LEER);
+            throw new ExpectedException(ERROR_VORNAME_LEER);
         }
         if(nachname == null || nachname.isBlank()){
-            throw new IllegalArgumentException(ERROR_NACHNAME_LEER);
+            throw new ExpectedException(ERROR_NACHNAME_LEER);
         }
 
         this.vorname = vorname.strip();
