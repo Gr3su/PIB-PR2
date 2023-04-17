@@ -1,8 +1,8 @@
 /**
- * Beschreiben Sie hier die Klasse Person.
- *
- * @author (Ihr Name)
- * @version (eine Versionsnummer oder ein Datum)
+ * Klasse Person.
+ * 
+ * @author Tim Mueller / Yannick Gross
+ * @version 16.04.2023 / 20:00
  */
 public class Person {
     //Prompts
@@ -16,8 +16,8 @@ public class Person {
     /**
      * Personen-Konstruktor um ein Personen Objekt zu erstellen.
      *
-     * @param vorname Vorname
-     * @param nachname Nachname
+     * @param vorname Vorname.
+     * @param nachname Nachname.
      */
     public Person(String vorname, String nachname) {
         if(vorname == null || vorname.isBlank()){
@@ -32,24 +32,26 @@ public class Person {
     }
 
     /**
+     * Gibt den Vornamen der Person zurueck.
      *
-     * @return Vorname der Person
+     * @return Vorname der Person.
      */
     public String getVorname() {
         return vorname;
     }
 
     /**
+     * Gibt den Nachnamen der Person zurueck.
      *
-     * @return Nachname der Person
+     * @return Nachname der Person.
      */
     public String getNachname() {
         return nachname;
     }
 
     /**
-     * Bereitet die Attribute einer Person in folgendem Format auf: Vorname Nachname
-     * @return String mit vollem Namen
+     * Bereitet die Attribute einer Person in folgendem Format auf: Vorname Nachname.
+     * @return String mit vollem Namen.
      */
     @Override
     public String toString() {
@@ -59,8 +61,8 @@ public class Person {
     /**
      * Ueberprueft ob ein Objekt gleich dem aufrufenden Personen Objekt ist.
      *
-     * @param obj Zu vergleichendes Objekt
-     * @return Boolean ob Objekte gleich
+     * @param obj Zu vergleichendes Objekt.
+     * @return Boolean ob Objekte gleich.
      */
     @Override
     public boolean equals(Object obj) {

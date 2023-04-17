@@ -1,8 +1,8 @@
 /**
- * Beschreiben Sie hier die Klasse Uhrzeit.
- *
- * @author (Ihr Name)
- * @version (eine Versionsnummer oder ein Datum)
+ * Klasse Uhrzeit.
+ * 
+ * @author Tim Mueller / Yannick Gross
+ * @version 16.04.2023 / 20:00
  */
 public class Uhrzeit {
     //Prompts
@@ -12,7 +12,15 @@ public class Uhrzeit {
     //Attributes
     private int stunde;
     private int minute;
-
+    /**
+    * Konstruktor fuer die Klasse Uhrzeit mit allen Attributen.
+    * 
+    * @param stunde Stunde der Uhrzeit.
+    * @param minute Minute der uhrzeit.
+     
+    * @throws IllegalArgumentException stunde ist nicht im bereich von 0-23 geweahlt.
+    * @throws IllegalArgumentException minute ist nicht im bereich von 0-59 geweahlt.
+    */
     public Uhrzeit(int stunde, int minute){
         if (stunde < 0 || stunde > 23){
             throw new IllegalArgumentException(ERROR_STUNDE);
@@ -25,15 +33,30 @@ public class Uhrzeit {
         this.minute = minute;
 
     }
-
+    
+    /**
+     * Gibt die Minute der Uhrzeit zurueck.
+     *
+     * @return Minute der Uhrzeit.
+     */
     public int getMinute(){
         return minute;
     }
-
+    /**
+     * Gibt die Stunde der Uhrzeit zurueck.
+     *
+     * @return Stunde der Uhrzeit.
+     */
     public int getStunde(){
         return stunde;
     }
     
+     /**
+     * Ueberprueft ob ein Objekt gleich dem aufrufenden Uhrzeit Objekt ist.
+     *
+     * @param obj Zu vergleichendes Objekt
+     * @return Boolean ob Objekte gleich
+     */
     @Override
     public boolean equals(Object obj){
         
@@ -54,7 +77,12 @@ public class Uhrzeit {
         }
         return false;
     }
-
+    
+    /**
+     * Gibt einen Uhrzeit String mit allen Attributen der Uhrzeit zurueck.
+     * 
+     * @return String mit Attributen.
+     */
     @Override
     public String toString(){
 
