@@ -1,6 +1,5 @@
 /**
  * Klasse Mitarbeiter.
- * 
  * Erbt von Person
  * 
  * @author Tim Mueller / Yannick Gross
@@ -25,10 +24,6 @@ public class Mitarbeiter extends Person{
     */
     public Mitarbeiter(String vorname, String nachname, String email) {
         super(vorname, nachname);
-
-        if(email.isBlank()){
-            throw new IllegalArgumentException(ERROR_EMAIL_LEER);
-        }
         setEmail(email);
     }
     /**
@@ -49,7 +44,7 @@ public class Mitarbeiter extends Person{
     */
     public void setEmail(String email){
         if(email == null || email.isBlank()){
-            throw new IllegalArgumentException(ERROR_EMAIL_LEER);
+            throw new ExpectedException(ERROR_EMAIL_LEER);
         }
 
         this.email = email;
@@ -57,11 +52,10 @@ public class Mitarbeiter extends Person{
 
      /**
     * Reserviert einen Termin fuer einen ausgeweahlten Raum.
-    * 
     * reservierung wird dem ausgeweahlten Raum hinzugefuegt.
     */
     public void reserviere(Raum raum, Uhrzeit beginn, Uhrzeit ende, String bemerkung){
-        Reservierung reservierung = new Reservierung(beginn, ende, this, bemerkung);
+        Reservierung reservierung = new Reservierung(beginn, ende, this, bemerkung, raum);
         raum.addReservierung(reservierung);
     }
     /**

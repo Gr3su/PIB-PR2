@@ -22,18 +22,34 @@ public class Uhrzeit {
     * @throws IllegalArgumentException minute ist nicht im bereich von 0-59 geweahlt.
     */
     public Uhrzeit(int stunde, int minute){
-        if (stunde < 0 || stunde > 23){
-            throw new IllegalArgumentException(ERROR_STUNDE);
-        }
+        setStunde(stunde);
+        setMinute(minute);
+    }
+
+    /**
+     * Setzt Stunde und ueberprueft ob es zwischen 0 und 59 liegt.
+     * @param minute Minuten der Uhrzeit.
+     */
+    public void setMinute(int minute){
         if (minute < 0 || minute > 59){
-            throw new IllegalArgumentException(ERROR_MINUTE);
+            throw new ExpectedException(ERROR_MINUTE);
+        }
+
+        this.minute = minute;
+    }
+
+    /**
+     * Setzt Stunde und ueberprueft ob es zwischen 0 und 23 liegt.
+     *
+     * @param stunde Stunde der Uhrzeit.
+     */
+    public void setStunde(int stunde){
+        if (stunde < 0 || stunde > 23){
+            throw new ExpectedException(ERROR_STUNDE);
         }
 
         this.stunde = stunde;
-        this.minute = minute;
-
     }
-    
     /**
      * Gibt die Minute der Uhrzeit zurueck.
      *

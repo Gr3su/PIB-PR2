@@ -64,8 +64,8 @@ public final class Dialog {
     private static final String     EINGABE_GEBAEUDE        = "Bitte gebe die Gebaeude-Nummer ein:\n";
     private static final String     EINGABE_ETAGE           = "Bitte gebe die Etage ein:\n";
     private static final String     EINGABE_RAUMNUMMER      = "Bitte gebe die Raum-Nummer ein:\n";
-    private static final String     EINGABE_BEGINN          = "Bitte gebe den Beginn der Reservierung ein:\n";
-    private static final String     EINGABE_ENDE            = "Bitte gebe das Ende der Reservierung ein:\n";
+    private static final String     EINGABE_BEGINN          = "Bitte gebe den Beginn der Reservierung ein:";
+    private static final String     EINGABE_ENDE            = "Bitte gebe das Ende der Reservierung ein:";
     private static final String     EINGABE_INDEX           = "Bitte gebe deinen gewuenschten Index ein:\n";
 
     //Attributes
@@ -123,8 +123,11 @@ public final class Dialog {
                         throw new IllegalArgumentException(ERROR_OPTION_INVALID);
                 }
             }
+            catch(ExpectedException e){
+                System.err.println("-Erwarteter Fehler-\n" + e.getMessage());
+            }
             catch(Exception e){
-                System.err.println(e.getMessage());
+                System.err.println("-Unerwarteter Fehler-\n" + e.getMessage());
             }
         }
     }
@@ -149,7 +152,7 @@ public final class Dialog {
             switch(input){
                 case 1:
                     if(mitarbeiterAnzahl == 20){
-                        throw new IllegalArgumentException(ERROR_MAX_MITARBEITER);
+                        throw new ExpectedException(ERROR_MAX_MITARBEITER);
                     }
 
                     String vorname = readString(EINGABE_VORNAME);
@@ -235,7 +238,8 @@ public final class Dialog {
                         System.err.println(ERROR_KEINE_RESERV);
                         break;
                     }
-                    //reservierung.setRaum(raumAuswahl());
+
+                    reservierung.setRaum(raumAuswahl());
                     break;
 
                 case 5:
@@ -266,7 +270,7 @@ public final class Dialog {
             switch(input){
                 case 1:
                     if(raumAnzahl == 20){
-                        throw new IllegalArgumentException(ERROR_MAX_RAEUME);
+                        throw new ExpectedException(ERROR_MAX_RAEUME);
                     }
 
                     int geb = readInt(EINGABE_GEBAEUDE);
@@ -319,7 +323,7 @@ public final class Dialog {
      */
     private Mitarbeiter mitarbeiterAuswahl(){
         if(mitarbeiterAnzahl == 0){
-            throw new IllegalArgumentException(ERROR_KEIN_MITARBEITER);
+            throw new ExpectedException(ERROR_KEIN_MITARBEITER);
         }
 
         for(int i = 0; i < mitarbeiterAnzahl; i++){
@@ -328,7 +332,7 @@ public final class Dialog {
         byte input = readByte(EINGABE_MITARBEITER);
 
         if(input < 0 || input >= mitarbeiterAnzahl){
-            throw new IllegalArgumentException(ERROR_OPTION_INVALID);
+            throw new ExpectedException(ERROR_OPTION_INVALID);
         }
 
         return mitarbeiterListe[input];
@@ -341,7 +345,7 @@ public final class Dialog {
      */
     private Raum raumAuswahl(){
         if(raumAnzahl == 0){
-            throw new IllegalArgumentException(ERROR_KEIN_RAUM);
+            throw new ExpectedException(ERROR_KEIN_RAUM);
         }
 
         for(int i = 0; i < raumAnzahl; i++){
@@ -350,7 +354,7 @@ public final class Dialog {
         byte input = readByte(EINGABE_RAUM);
 
         if(input < 0 || input >= raumAnzahl){
-            throw new IllegalArgumentException(ERROR_OPTION_INVALID);
+            throw new ExpectedException(ERROR_OPTION_INVALID);
         }
 
         return raeume[input];

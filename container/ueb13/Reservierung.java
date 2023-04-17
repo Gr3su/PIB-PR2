@@ -14,6 +14,7 @@ public class Reservierung {
     private Uhrzeit beginn;
     private Uhrzeit ende;
     private Mitarbeiter mitarbeiter;
+    private Raum raum;
     
     /**
     * Konstruktor fuer die Klasse Reservierung mit allen Attributen.
@@ -21,28 +22,71 @@ public class Reservierung {
     * @param beginn Uhrzeit des Anfangs der Reservierung.
     * @param ende Uhrzeit des Endes der Reservierung.
     * @param mitarbeiter Mitarbeiter auf welchen der Raum reserviert wird.
-    * @param bemerkung anhaengende bemerkung der Reservierung.
-     
+    * @param bemerkung Anhaengende bemerkung der Reservierung.
+    * @param raum Raum in der die Reservierung platziert ist.
+    *
     * @throws IllegalArgumentException wenn eine fehlerhafte Uhrzeit uebergeben wird.
     */
-   public Reservierung(Uhrzeit beginn, Uhrzeit ende, Mitarbeiter mitarbeiter, String bemerkung){
+   public Reservierung(Uhrzeit beginn, Uhrzeit ende, Mitarbeiter mitarbeiter, String bemerkung, Raum raum){
         if(beginn == null){
-            throw new IllegalArgumentException(ERROR_FEHLER_UHRZEIT);
+            throw new ExpectedException(ERROR_FEHLER_UHRZEIT);
         }
         if(ende == null){
-            throw new IllegalArgumentException(ERROR_FEHLER_UHRZEIT);
+            throw new ExpectedException(ERROR_FEHLER_UHRZEIT);
         }
 
         this.beginn = beginn;
         this.ende   = ende;
         this.mitarbeiter = mitarbeiter;
+        this.raum = raum;
         setBemerkung(bemerkung);
     }
 
     public Reservierung(Uhrzeit beginn, Uhrzeit ende){
-        this(beginn, ende, null, "");
+        this(beginn, ende, null, "", null);
     }
-     /**
+
+    /**
+     *
+     * @return bemerkung
+     */
+    public String getBemerkung(){
+       return bemerkung;
+    }
+
+    /**
+     *
+     * @return Mitarbeiter
+     */
+    public Mitarbeiter getMitarbeiter(){
+        return mitarbeiter;
+    }
+
+    /**
+     *
+     * @return raum
+     */
+    public Raum getRaum(){
+        return raum;
+    }
+
+    /**
+     *
+     * @return beginn
+     */
+    public Uhrzeit getBeginn(){
+        return beginn;
+    }
+
+    /**
+     *
+     * @return ende
+     */
+    public Uhrzeit getEnde(){
+        return ende;
+    }
+
+    /**
     * Ueberschreibt die Bemerkung der Reservierung mit dem uebergebenen String.
     * 
     * @param bemerkung Neue Bemerkung der Reservierung.
@@ -51,7 +95,7 @@ public class Reservierung {
     */
     public void setBemerkung(String bemerkung){
         if(bemerkung == null){
-            throw new IllegalArgumentException(ERROR_BEMERKUNG_NULL);
+            throw new ExpectedException(ERROR_BEMERKUNG_NULL);
         }
 
         this.bemerkung = bemerkung;
@@ -65,9 +109,21 @@ public class Reservierung {
     public void setMitarbeiter(Mitarbeiter mitarbeiter){
         this.mitarbeiter = mitarbeiter;
     }
+
+    /**
+     * Aendert die Reservierung auf einen anderen Raum.
+     * Die Reservierung wird NICHT aus dem alten Raum geloescht.
+     *
+     * @param raum Neuer Raum der reserviert wird
+     */
+    public void setRaum(Raum raum){
+        this.raum = raum;
+        raum.addReservierung(this);
+    }
+
     /**
      * Gibt die volle Reservierung aufbereitet in einem Stringformat zurueck.
-     * 
+     *
      * @return String mit Attributen.
      */
     @Override
@@ -84,7 +140,7 @@ public class Reservierung {
             bemerkungPrompt = "-nicht angegeben-";
         }
 
-        return "gebucht von " + mitarbeiterPrompt + " von " + beginn + " bis " + ende + " für " + bemerkungPrompt;
+        return "gebucht von " + mitarbeiterPrompt + " von " + beginn + " bis " + ende + " für " + bemerkungPrompt + "\n";
     }
 
 }
