@@ -82,7 +82,15 @@ public class Raum {
     public Reservierung getReservierung(int index){
         return reservierungen.getByIndex(index);
     }
-    
+
+    /**
+     *
+     * @return Anzahl der Reservierungen
+     */
+    public int getAnzahlReservierungen(){
+        return reservierungen.getAnzahl();
+    }
+
     /**
      * Gibt einen String mit allen Attributen des Raumes zurueck.
      * 

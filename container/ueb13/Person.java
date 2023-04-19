@@ -4,7 +4,7 @@
  * @author Tim Mueller / Yannick Gross
  * @version 16.04.2023 / 20:00
  */
-public class Person {
+public abstract class Person {
     //Prompts
     private static final String     ERROR_VORNAME_LEER  = "Vorname darf nicht leer sein.\n";
     private static final String     ERROR_NACHNAME_LEER = "Nachname darf nicht leer sein.\n";
