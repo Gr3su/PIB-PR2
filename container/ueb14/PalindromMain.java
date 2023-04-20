@@ -12,8 +12,8 @@ public class PalindromMain {
         this.ausgabe = new StringBuilder();
     }
 
-    public void addToAusgabe(String tmp, boolean bool){
-        ausgabe.append(String.format("%s10 - %b", tmp, bool));
+    public void addToAusgabe(String method, String word, boolean bool){
+        ausgabe.append(String.format("%20s - %10s - %b\n", method, word, bool));
     }
 
     public StringBuilder getAusgabe(){
@@ -24,13 +24,13 @@ public class PalindromMain {
         File file = new File(path);
 
         if(!file.isFile()){
-
+            throw new IllegalArgumentException();
         }
         if(!file.exists()){
-
+            throw new IllegalArgumentException();
         }
         if(!file.canRead()){
-
+            throw new IllegalArgumentException();
         }
 
         return file;
@@ -61,10 +61,19 @@ public class PalindromMain {
     private void checkForPalindrom(String word){
         Palindrom [] methods = { new PalindromRekursiv(),
                                 new PalindromIterativ()};
+        long begin;
+        long end;
 
         for(Palindrom method: methods){
-            addToAusgabe(word, method.istPalindrom(word));
+            begin = System.nanoTime();
+            addToAusgabe(method.getClass().getName(), word, method.istPalindrom(word));
+            end = System.nanoTime();
+            saveTime(end - begin, method.getClass().getName());
         }
+    }
+
+    private void saveTime(long time, String method){
+
     }
 
     public static void main(String [] args){
