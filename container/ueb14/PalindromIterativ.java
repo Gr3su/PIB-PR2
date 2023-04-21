@@ -2,9 +2,6 @@ public class PalindromIterativ implements Palindrom{
 
     @Override
     public boolean istPalindrom(String wort){
-        if(wort.length() % 2 == 1){
-            return false;
-        }
         wort = wort.toLowerCase();
 
         for(int i = 0; i < wort.length() / 2; i++){

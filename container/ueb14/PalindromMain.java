@@ -1,23 +1,28 @@
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 
 public class PalindromMain {
+    //Error-Messages
     private static final String ERROR_NO_ARGUMENT = "Kein Uebergabeparameter mit gegeben.\n";
 
-    private StringBuilder ausgabe;
+    //Prompts
+    private static final String FILE_RESULTS_NAME = "testResults.csv";
+    private static final String MESSUNG_HEADER = "Laenge, Rekursiv, Iterativ\n";
+
+    //Attributes
+    private StringBuilder userAusgabe;
+    private StringBuilder messungAusgabe;
 
     public PalindromMain(){
-        this.ausgabe = new StringBuilder();
+        this.userAusgabe = new StringBuilder();
+        this.messungAusgabe = new StringBuilder(MESSUNG_HEADER);
     }
 
     public void addToAusgabe(String method, String word, boolean bool){
-        ausgabe.append(String.format("%20s - %10s - %b\n", method, word, bool));
+        userAusgabe.append(String.format("%20s - %10s - %b\n", method, word, bool));
     }
 
     public StringBuilder getAusgabe(){
-        return ausgabe;
+        return userAusgabe;
     }
 
     private static File fileValidation(String path){
@@ -63,17 +68,29 @@ public class PalindromMain {
                                 new PalindromIterativ()};
         long begin;
         long end;
+        word = word.strip();
+        messungAusgabe.append(word.length());
 
         for(Palindrom method: methods){
+
             begin = System.nanoTime();
             addToAusgabe(method.getClass().getName(), word, method.istPalindrom(word));
             end = System.nanoTime();
-            saveTime(end - begin, method.getClass().getName());
+
+            messungAusgabe.append(", " + String.valueOf(end - begin));
         }
+        messungAusgabe.append("\n");
     }
 
-    private void saveTime(long time, String method){
+    private void writeFile(){
 
+        try(BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_RESULTS_NAME))){
+            String tmp = messungAusgabe.toString();
+            writer.write(tmp, 0, tmp.length());
+        }
+        catch(Exception e){
+            System.err.println("FileWriter:\n" + e.getMessage());
+        }
     }
 
     public static void main(String [] args){
@@ -92,5 +109,6 @@ public class PalindromMain {
         }
 
         System.out.println(output.getAusgabe());
+        output.writeFile();
     }
 }
