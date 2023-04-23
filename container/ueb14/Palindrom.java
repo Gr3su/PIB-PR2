@@ -1,4 +1,6 @@
 /**
+ * Interface fuer Palindrom-Pruefer
+ *
  * @author Tim Mueller / Yannick Gross
  * @version 19.04.2023 / 15Uhr
  */

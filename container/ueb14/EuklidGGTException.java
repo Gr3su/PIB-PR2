@@ -1,10 +1,10 @@
-public class EuklidGGTError extends RuntimeException{
+public class EuklidGGTException extends RuntimeException{
 
-    public EuklidGGTError(){
+    public EuklidGGTException(){
         super();
     }
 
-    public EuklidGGTError(String msg){
+    public EuklidGGTException(String msg){
         super(msg);
     }
 
@@ -12,7 +12,7 @@ public class EuklidGGTError extends RuntimeException{
         String ErrorMessage = "Uebergebenes Attribut ist keine Zahl.\n";
         String numberRegex = "[0-9]+";
         if(!tmp.matches(numberRegex)){
-            throw new EuklidGGTError(ErrorMessage);
+            throw new EuklidGGTException(ErrorMessage);
         }
     }
 }
