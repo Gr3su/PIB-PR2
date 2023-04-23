@@ -68,7 +68,6 @@ public class PalindromMain {
                                 new PalindromIterativ()};
         long begin;
         long end;
-        word = word.strip();
         messungAusgabe.append(word.length());
 
         for(Palindrom method: methods){

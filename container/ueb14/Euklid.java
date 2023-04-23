@@ -1,6 +1,6 @@
-public class EuklidGGT {
+public class Euklid {
 
-    public EuklidGGT(){
+    private Euklid(){
     }
 
     public int ggT(int a, int b){
@@ -18,6 +18,6 @@ public class EuklidGGT {
         int b = Integer.parseInt(args[1]);
 
         System.out.println("Der ggT von " + a + " und " + b + "ist:");
-        System.out.println(new EuklidGGT().ggT(a, b));
+        System.out.println(new Euklid().ggT(a, b));
     }
 }
