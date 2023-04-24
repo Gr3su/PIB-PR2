@@ -1,5 +1,11 @@
 import java.io.File;
 
+/**
+ * Exception Klasse zur Dateiueberpruefung.
+ *
+ * @author Tim Mueller / Yannick Gross
+ * @version 23.04.2023 / 16:34Uhr
+ */
 public class FileValidationException extends RuntimeException{
     //Prompts
     private static final String ERROR_PFAD_EXISTIERT_NICHT = "Uebergebener Dateipfad existiert nicht.\n";
@@ -14,6 +20,14 @@ public class FileValidationException extends RuntimeException{
         super(msg);
     }
 
+    /**
+     * Prueft ob Dateipfad existiert, lesbar ist und eine Datei ist.
+     *
+     * @param path Dateipfad
+     * @return ob Dateipfad
+     *
+     * @throws FileValidationException Wenn nicht existent, nicht lesbar, keine Datei
+     */
     public static File fileValidation(String path){
         File file = new File(path);
 
