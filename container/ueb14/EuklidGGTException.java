@@ -1,5 +1,5 @@
 /**
- * Exception Klasse fuer Euklid.java
+ * Exception Klasse fuer EuklidRek.java
  *
  * @author Tim Mueller / Yannick Gross
  * @version 20.04.2023 / 15:00Uhr

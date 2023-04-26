@@ -1,7 +1,4 @@
-public class Euklid {
-
-    private Euklid(){
-    }
+public class EuklidRek implements GGT{
 
     /**
      * Berechnet den groessten gemeinsamen Teiler.
@@ -30,6 +27,6 @@ public class Euklid {
         int b = Integer.parseInt(args[1]);
 
         System.out.println("Der ggT von " + a + " und " + b + " ist:");
-        System.out.println(new Euklid().ggT(a, b));
+        System.out.println(new EuklidRek().ggT(a, b));
     }
 }
