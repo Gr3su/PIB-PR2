@@ -1,3 +1,4 @@
+package ueb15;
 /**
  * Beinhaltet alle Fehlermeldungen.
  *

@@ -1,3 +1,4 @@
+package ueb14;
 /**
  * Interface fuer Palindrom-Pruefer
  *

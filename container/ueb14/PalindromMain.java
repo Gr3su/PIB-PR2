@@ -1,3 +1,4 @@
+package ueb14;
 import java.io.*;
 /**
  * Klasse um Palindrom Methoden mit Aufrufparametern oder gefuellter Datei zu testen.

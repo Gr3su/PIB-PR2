@@ -1,3 +1,4 @@
+package ueb14;
 public class EuklidRek implements GGT{
 
     /**

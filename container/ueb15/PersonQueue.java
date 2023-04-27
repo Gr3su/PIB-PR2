@@ -1,4 +1,4 @@
-
+package ueb15;
 /**
  * Implementierung von Queue mit Personen.
  *
@@ -6,6 +6,26 @@
  * @version 19.01.2023 / 11:00Uhr
  */
 public class PersonQueue implements Queue{
+
+    /**
+     * Iterator um durch PersonQueue zu iterieren.
+     *
+     * Inner-Class, weil Zugriff auf non-static Kontext notwendig ist
+     * und das in mehreren Methoden, daher nicht Local.
+     */
+    private class Iterator implements PersonIterator{
+
+
+        @Override
+        public boolean hasNext(){
+
+        }
+
+        @Override
+        public Person next(){
+
+        }
+    }
 
     private Person [] queue;
     private int size;
