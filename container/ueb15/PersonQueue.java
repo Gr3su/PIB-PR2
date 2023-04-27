@@ -1,11 +1,17 @@
 package ueb15;
+
+import java.util.NoSuchElementException;
+
 /**
  * Implementierung von Queue mit Personen.
  *
  * @author Tim Mueller / Yannick Gross
- * @version 19.01.2023 / 11:00Uhr
+ * @version 27.04.2023 / 19:00Uhr
  */
 public class PersonQueue implements Queue{
+    //Prompts
+    private static final String ERROR_KEIN_ELEMENT      = "Kein weiteres Element mehr in Warteschlange.\n";
+
 
     /**
      * Iterator um durch PersonQueue zu iterieren.
@@ -14,16 +20,24 @@ public class PersonQueue implements Queue{
      * und das in mehreren Methoden, daher nicht Local.
      */
     private class Iterator implements PersonIterator{
+        private int iteratorPos;
 
+        public Iterator(){
+            this.iteratorPos = 0;
+        }
 
         @Override
         public boolean hasNext(){
-
+            return queue[iteratorPos] != null;
         }
 
         @Override
         public Person next(){
+            if(hasNext()){
+                return queue[iteratorPos++];
+            }
 
+            throw new NoSuchElementException(ERROR_KEIN_ELEMENT);
         }
     }
 
@@ -55,6 +69,38 @@ public class PersonQueue implements Queue{
         this(10);
     }
 
+    public void print(){
+        QueueException.queueEmpty(this);
+
+        PersonQueue.Iterator iterator = this.new Iterator();
+
+        while(iterator.hasNext()){
+            System.out.println(iterator.next());
+        }
+    }
+
+    public String smallest(){
+        QueueException.queueEmpty(this);
+
+        PersonQueue.Iterator iterator = this.new Iterator();
+        Person smallestName = null;
+        Person tmp;
+        int tmpLength;
+        int smallestLength = Integer.MAX_VALUE;
+
+        while(iterator.hasNext()){
+            tmp = iterator.next();
+            tmpLength = tmp.getVorname().length();
+
+            if(tmpLength < smallestLength){
+                smallestName = tmp;
+                smallestLength = tmpLength;
+            }
+        }
+
+        return smallestName.toString();
+    }
+
     @Override
     public int getCapacity(){
         return capacity;
@@ -71,11 +117,11 @@ public class PersonQueue implements Queue{
      */
     @Override
     public void addLast(Object obj){
-        if(!(obj instanceof Person)){
-            throw new IllegalArgumentException(ErrorMessages.KEIN_PERSONENOBJEKT.getMessage());
-        }
         if(obj == null){
             throw new IllegalArgumentException(ErrorMessages.OBJEKT_IST_NULL.getMessage());
+        }
+        if(!(obj instanceof Person)){
+            throw new IllegalArgumentException(ErrorMessages.KEIN_PERSONENOBJEKT.getMessage());
         }
         if(full()){
             throw new IllegalArgumentException(ErrorMessages.QUEUE_VOLL.getMessage());
@@ -161,7 +207,7 @@ public class PersonQueue implements Queue{
 
     @Override
     public String toString(){
-        StringBuilder ausgabe = new StringBuilder("");
+        StringBuilder ausgabe = new StringBuilder();
 
         for(int i = 0; i < size; i++){
             ausgabe.append(i + " : " + queue[i] + "\n");
