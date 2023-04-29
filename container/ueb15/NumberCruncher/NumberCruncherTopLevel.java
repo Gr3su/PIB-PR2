@@ -18,7 +18,7 @@ public class NumberCruncherTopLevel extends NumberCruncher{
         new Swirl().crunch(values);
     }
 
-    public void substract(){
+    public void subtract(){
         new Subtract().crunch(values);
     }
 
