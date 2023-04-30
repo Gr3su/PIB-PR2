@@ -28,7 +28,7 @@ public class PersonQueue implements Queue{
 
         @Override
         public boolean hasNext(){
-            return queue[iteratorPos] != null;
+            return iteratorPos < queue.length && queue[iteratorPos] != null;
         }
 
         @Override

@@ -6,6 +6,7 @@ public class NumberCruncherAnonym extends NumberCruncher{
         super(values);
     }
 
+    @Override
     public void sum(){
         CrunchOperation sum = new CrunchOperation() {
             @Override
@@ -19,6 +20,7 @@ public class NumberCruncherAnonym extends NumberCruncher{
         sum.crunch(values);
     }
 
+    @Override
     public void swirl(){
         CrunchOperation swirl = new CrunchOperation() {
             @Override
@@ -40,6 +42,7 @@ public class NumberCruncherAnonym extends NumberCruncher{
         swirl.crunch(values);
     }
 
+    @Override
     public void subtract(){
         CrunchOperation subtract = new CrunchOperation() {
             @Override
@@ -53,6 +56,7 @@ public class NumberCruncherAnonym extends NumberCruncher{
         subtract.crunch(values);
     }
 
+    @Override
     public void divide(){
         CrunchOperation divide = new CrunchOperation() {
             @Override
@@ -88,6 +92,7 @@ public class NumberCruncherAnonym extends NumberCruncher{
         };
     }
 
+    @Override
     public void average(){
         CrunchOperation average = new CrunchOperation() {
             @Override

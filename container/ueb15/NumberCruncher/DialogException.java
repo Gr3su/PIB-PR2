@@ -15,11 +15,11 @@ public class DialogException extends RuntimeException{
     }
 
     public static void stringIsFloat(String tmp){
-        if(tmp.matches("^[0-9]*,[0-9]*$")){
+        if(tmp.matches("^-?[0-9]*,[0-9]*$")){
             throw new DialogException(ERROR_KOMMA_PUNKT);
         }
 
-        if(!(tmp.matches("^[0-9]*\\.?[0-9]+$"))){
+        if(!(tmp.matches("^-?[0-9]*\\.?[0-9]+$"))){
             throw new DialogException(ERROR_KEINE_FLOAT + tmp);
         }
     }

@@ -15,4 +15,5 @@ public interface Queue {
     boolean full(); //Testen, ob noch Elemente einfuegbar sind
     int size(); //Anzahl eingefuegter Elemente
     int getCapacity(); //Anzahl der moeglich einzufuegenden Elemente
+
 }
