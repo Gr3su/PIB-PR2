@@ -83,22 +83,20 @@ public class PersonQueue implements Queue{
         QueueException.queueEmpty(this);
 
         PersonQueue.Iterator iterator = this.new Iterator();
-        Person smallestName = null;
-        Person tmp;
-        int tmpLength;
-        int smallestLength = Integer.MAX_VALUE;
+        Person smallest = iterator.next();
+        Person next = null;
+        String smallestName = smallest.getVorname();
 
         while(iterator.hasNext()){
-            tmp = iterator.next();
-            tmpLength = tmp.getVorname().length();
+            next = iterator.next();
 
-            if(tmpLength < smallestLength){
-                smallestName = tmp;
-                smallestLength = tmpLength;
+            if(next.getVorname().compareToIgnoreCase(smallestName) < 0){
+                smallest = next;
+                smallestName = smallest.getVorname();
             }
         }
 
-        return smallestName.toString();
+        return smallest.toString();
     }
 
     @Override
