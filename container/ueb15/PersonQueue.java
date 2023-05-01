@@ -69,6 +69,9 @@ public class PersonQueue implements Queue{
         this(10);
     }
 
+    /**
+     * Printed die Warteschlange auf stdout mit Hilfe des Iterators.
+     */
     public void print(){
         QueueException.queueEmpty(this);
 
@@ -79,6 +82,11 @@ public class PersonQueue implements Queue{
         }
     }
 
+    /**
+     * Gibt den lexikographisch kleinsten Vornamen zurueck.
+     *
+     * @return lexikographisch kleinsten Vornamen.
+     */
     public String smallest(){
         QueueException.queueEmpty(this);
 

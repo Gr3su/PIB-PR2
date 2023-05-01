@@ -10,12 +10,23 @@ public abstract class NumberCruncher {
     //Prompts
     private static final String     ERROR_OPTION_UNBEKANNT = "Folgende Operation ist nicht bekannt: ";
 
+    //Attributes
     protected float [] values;
 
+    /**
+     * Konstruktoer zur Initialisierung des float Arrays
+     *
+     * @param values
+     */
     public NumberCruncher(float [] values){
         this.values = values;
     }
 
+    /**
+     * Fuehrt nach und nach die uebergebenen Operationen durch.
+     *
+     * @param operations String Array mit den auszufuehrenden Operationen.
+     */
     public void crunch(String [] operations){
         for(String oper: operations){
 
@@ -52,6 +63,10 @@ public abstract class NumberCruncher {
         }
     };
 
+    /**
+     *
+     * @return dem Konstruktor uebergebenes float-Array
+     */
     public float[] getNumbers(){
         return values;
     }

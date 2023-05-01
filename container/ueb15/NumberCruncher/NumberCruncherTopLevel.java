@@ -1,4 +1,11 @@
 package ueb15.NumberCruncher;
+/**
+ * Top-Level Klasse zum managen der Top-Level Klassen der einzelnen Methoden.
+ * Dient lediglich des Aufrufs der einzelnen Crunch(float [] values) Methoden.
+ *
+ * @author Yannick Gross / Tim Mueller
+ * @version 30.04.2023 / 15:00Uhr
+ */
 
 public class NumberCruncherTopLevel extends NumberCruncher{
 

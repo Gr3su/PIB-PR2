@@ -1,7 +1,20 @@
 package ueb15.NumberCruncher;
+/**
+ * Top-Level Klasse fuer Methode Divide
+ *
+ * @author Yannick Gross / Tim Mueller
+ * @version 30.04.2023 / 15:00Uhr
+ */
 
 public class Divide implements CrunchOperation{
 
+    /**
+     * Teilt die n/2 größten Werte im Array durch die n/2 Kleinsten und speichert den
+     * neuen Wert im Datenfeld des jeweils größeren Wertes. D.h. der größte Wert wird durch
+     * den Kleinsten geteilt. Der Zweitgrößte durch den Zweitkleinsten usw
+     *
+     * @param values float Array
+     */
     @Override
     public void crunch(float [] values){
         float [][] valuesCopy = new float[values.length][2];

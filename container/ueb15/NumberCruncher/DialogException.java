@@ -1,4 +1,10 @@
 package ueb15.NumberCruncher;
+/**
+ * Exception Klasse fuer Dialog.
+ *
+ * @author Yannick Gross / Tim Mueller
+ * @version 30.04.2023 / 15:00Uhr
+ */
 
 public class DialogException extends RuntimeException{
     //Errors
@@ -14,6 +20,11 @@ public class DialogException extends RuntimeException{
         super(msg);
     }
 
+    /**
+     * Prueft ob uebergebener String eine float Zahl ist.
+     *
+     * @param tmp zu pruefender String.
+     */
     public static void stringIsFloat(String tmp){
         if(tmp.matches("^-?[0-9]*,[0-9]*$")){
             throw new DialogException(ERROR_KOMMA_PUNKT);
@@ -24,6 +35,11 @@ public class DialogException extends RuntimeException{
         }
     }
 
+    /**
+     * Prueft ob uebergebene Array-Laenge groesser als 0 ist.
+     *
+     * @param a Arraylaenge
+     */
     public static void arrayLaenge(int a){
         if(a < 1){
             throw new DialogException(ERROR_ARRAY_KURZ);

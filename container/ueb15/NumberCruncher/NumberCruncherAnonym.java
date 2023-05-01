@@ -1,11 +1,27 @@
 package ueb15.NumberCruncher;
 
+/**
+ * Implementierung der Crunch Methoden als Annonyme Klassen.
+ *
+ * @author Yannick Gross / Tim Mueller
+ * @version 30.04.2023 / 15:00Uhr
+ */
+
 public class NumberCruncherAnonym extends NumberCruncher{
 
+    /**
+     * Konstruktor ruft lediglich super Konstruktor auf.
+     *
+     * @param values float Array mit den gewuenschten Parametern.
+     */
     public NumberCruncherAnonym(float [] values){
         super(values);
     }
 
+    /**
+     *  Summiert die Elemente des Arrays paarweise von links nach rechts auf und speichert den neuen
+     *  Wert in dem jeweils rechten Datenfeld. D.h.: a[1] = a[0] + a[1]; a[2] = a[1] + a[2] usw
+     */
     @Override
     public void sum(){
         CrunchOperation sum = new CrunchOperation() {
@@ -20,6 +36,10 @@ public class NumberCruncherAnonym extends NumberCruncher{
         sum.crunch(values);
     }
 
+    /**
+     * Führt n zufällige Vertauschungen der Datenfelder durch; n ist durch die Länge des
+     * float-Arrays gegeben
+     */
     @Override
     public void swirl(){
         CrunchOperation swirl = new CrunchOperation() {
@@ -42,6 +62,10 @@ public class NumberCruncherAnonym extends NumberCruncher{
         swirl.crunch(values);
     }
 
+    /**
+     * Subtrahiert die Elemente des Arrays paarweise von links nach und speichert
+     * den neuen Wert in dem jeweils rechten Datenfeld. D.h.: a[1] = a[0] - a[1]; a[2] = a[1] - a[2] usw
+     */
     @Override
     public void subtract(){
         CrunchOperation subtract = new CrunchOperation() {
@@ -56,6 +80,11 @@ public class NumberCruncherAnonym extends NumberCruncher{
         subtract.crunch(values);
     }
 
+    /**
+     * Teilt die n/2 größten Werte im Array durch die n/2 Kleinsten und speichert den
+     * neuen Wert im Datenfeld des jeweils größeren Wertes. D.h. der größte Wert wird durch
+     * den Kleinsten geteilt. Der Zweitgrößte durch den Zweitkleinsten usw
+     */
     @Override
     public void divide(){
         CrunchOperation divide = new CrunchOperation() {
@@ -92,6 +121,10 @@ public class NumberCruncherAnonym extends NumberCruncher{
         };
     }
 
+    /**
+     * Bestimmt den Durchschnitt aller Werte im Array und speichert den
+     * Durchschnittswert im Datenfeld mit dem größten Wert
+     */
     @Override
     public void average(){
         CrunchOperation average = new CrunchOperation() {
