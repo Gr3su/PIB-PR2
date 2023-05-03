@@ -1,3 +1,4 @@
+package ueb14;
 /**
  * Rekursive Implementierung um auf Palindrom zu pruefen.
  *

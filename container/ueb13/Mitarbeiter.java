@@ -1,3 +1,5 @@
+package ueb13;
+
 /**
  * Klasse Mitarbeiter.
  * Erbt von Person

@@ -1,3 +1,4 @@
+package ueb13;
 /**
  * Exception Klasse um Fehler abzufangen die vom geschriebenen Code
  * geworfen werden.

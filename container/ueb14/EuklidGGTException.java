@@ -1,3 +1,4 @@
+package ueb14;
 /**
  * Exception Klasse fuer EuklidRek.java
  *

@@ -1,3 +1,4 @@
+package ueb13;
 /**
  * Dialogklasse zum Testen der Uebung 13.
  *
