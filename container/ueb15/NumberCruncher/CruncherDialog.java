@@ -69,8 +69,8 @@ public final class CruncherDialog {
 
                     case 3:
                         arrayErstellen();
-                        crunchers = new NumberCruncher[] { new NumberCruncherTopLevel(values),
-                                                            new NumberCruncherAnonym(values)};
+                        crunchers = new NumberCruncher[] { new NumberCruncherTopLevel(values.clone()),
+                                                            new NumberCruncherAnonym(values.clone())};
                         break;
 
                     case 4:
