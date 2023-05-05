@@ -9,7 +9,7 @@ package ueb16;
  * @param <T> Getreank und Sub-Typen
  */
 
-public class Flasche <T extends Getraenk> {
+public class Flasche <T extends Getraenk>{
     //Attributes
     private T inhalt;
     private boolean istVoll;

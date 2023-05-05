@@ -14,16 +14,30 @@ public class Getraenkeautomat <T extends Getraenk> {
     private ArrayList<Flasche<?>> flaschenlager;
     private int kapazitaet;
 
+    /**
+     * Erstellt einen Standard-Automaten mit einer Kapazitaet von 30 Flaschen.
+     */
     public Getraenkeautomat(){
         flaschenlager = new ArrayList<>();
         kapazitaet = 30;
     }
 
+    /**
+     * Erstellt einen Automaten mit gewuenschter Kapazitaet.
+     *
+     * @param kapazitaet
+     */
     public Getraenkeautomat(int kapazitaet){
         flaschenlager = new ArrayList<>();
         setKapazitaet(kapazitaet);
     }
 
+    /**
+     * Nimmt nur eine Flasche des passenden Types entgegen.
+     * Prueft ob Flasche voll ist und ob Kapazitaet noch nicht ausgeschoepft ist.
+     *
+     * @param flasche Einzulagernde Flasche
+     */
     public void flascheEinlegen(Flasche<? extends T> flasche){
         GetraenkeautomatException.capacityReached(flaschenlager.size(), kapazitaet);
         GetraenkeautomatException.flascheVoll(flasche);
@@ -32,10 +46,19 @@ public class Getraenkeautomat <T extends Getraenk> {
         kapazitaet++;
     }
 
+    /**
+     * Nach FIFO Prinzip wird die Flasche an Index 0 zurueckgegeben.
+     *
+     * @return Flasch an Index 0
+     */
     public Flasche<?> flascheAusgeben(){
         GetraenkeautomatException.empty(flaschenlager.size());
 
         return flaschenlager.remove(0);
+    }
+
+    public int getKapazitaet(){
+        return kapazitaet;
     }
 
     public void setKapazitaet(int kapazitaet){
@@ -44,9 +67,16 @@ public class Getraenkeautomat <T extends Getraenk> {
         this.kapazitaet = kapazitaet;
     }
 
+    /**
+     * Bereitet die Kapazitaet und den Inhalt als String auf.
+     *
+     * @return String im Format: Automaten Inhalt\nKapazitaet: X\nInhalt1\nInhalt2\n...
+     */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("Automaten Inhalt:\n");
+        sb.append("Kapazitaet: " + kapazitaet + "\n");
+
         if(flaschenlager.size() == 0){
             return sb.append("--Leer--").toString();
         }
