@@ -45,12 +45,14 @@ public class AutomatDialog <T extends Getraenk>{
     //Attributes
     private Scanner scanner;
     private static boolean killProgram = false;
+    private static byte typeWahl;
     private Getraenkeautomat<T> automat;
     //private ArrayList<Getraenkeautomat> automaten;
 
 
     private AutomatDialog(){
         this.scanner = new Scanner(System.in);
+        typeWahl = -1;
     }
 
     private AutomatDialog(Getraenkeautomat<T> automat){
@@ -74,7 +76,8 @@ public class AutomatDialog <T extends Getraenk>{
 
                 switch(option){
                     case 0:
-                        return;
+                        killProgram = true;
+                        break;
 
                     case 1:
                         automatErstellen();
@@ -117,6 +120,7 @@ public class AutomatDialog <T extends Getraenk>{
 
         int kapazitaet = readInt(EINGABE_KAPAZITAET);
         byte getraenk = readByte(EINGABE_AUTOMAT_GETRAENK);
+        this.typeWahl = getraenk;
 
         if (getraenk == 0){
             Getraenkeautomat<Getraenk> tmp = new Getraenkeautomat<>(kapazitaet);
@@ -172,37 +176,36 @@ public class AutomatDialog <T extends Getraenk>{
 
         String name = readString("Name des Getraenks:");
 
-        if(getraenkeWahl < 2){
+        if(getraenkeWahl < 2 && typeWahl < 2){
             String hersteller = readString("Name des Herstellers:");
 
-            if(getraenkeWahl == 0){
+            if(getraenkeWahl == 0 && typeWahl == 0){
                 String quelle = readString("Wasserquelle:");
-                Flasche<? extends T> p = new Flasche<Wasser>(new Wasser(quelle, hersteller, name));
-                automat.flascheEinlegen(p);
+                automat.flascheEinlegen((Flasche<? extends T>) new Flasche<Wasser>(new Wasser(quelle, hersteller, name)));
             }
-            else{
+            else if(typeWahl == 1){
                 float zuckergehalt = readFloat("Zuckergehalt:");
                 automat.flascheEinlegen((Flasche<? extends T>) new Flasche<Softdrink>(new Softdrink(zuckergehalt, hersteller, name)));
             }
         }
 
-        else{
+        else if(getraenkeWahl > 1 && typeWahl > 1){
             float alkoholGehalt = readFloat("Alkoholgehalt:");
 
-            if(getraenkeWahl == 2){
+            if(getraenkeWahl == 2 && typeWahl == 2){
                 String brauerei = readString("Name der Brauerei:");
                 automat.flascheEinlegen((Flasche<? extends T>) new Flasche<>(new Bier(brauerei, alkoholGehalt, name)));
             }
             else{
                 String weingut = readString("Weingut:");
 
-                if(getraenkeWahl == 3){
+                if(getraenkeWahl == 3 && typeWahl == 3){
                     automat.flascheEinlegen((Flasche<? extends T>) new Flasche<>(new Wein(weingut, alkoholGehalt, name)));
                 }
-                else if (getraenkeWahl == 4) {
+                else if (getraenkeWahl == 4 && typeWahl == 4) {
                     automat.flascheEinlegen((Flasche<? extends T>) new Flasche<>(new Rotwein(weingut, alkoholGehalt, name)));
                 }
-                else if (getraenkeWahl == 5) {
+                else if (getraenkeWahl == 5 && typeWahl == 5) {
                     automat.flascheEinlegen((Flasche<? extends T>) new Flasche<>(new Weisswein(weingut, alkoholGehalt, name)));
                 }
             }
