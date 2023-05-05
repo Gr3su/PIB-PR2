@@ -1,4 +1,4 @@
-import java.util.Objects;
+package ueb16;
 
 public abstract class AlkoholischesGetraenk extends Getraenk {
 
@@ -30,11 +30,17 @@ public abstract class AlkoholischesGetraenk extends Getraenk {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-        AlkoholischesGetraenk that = (AlkoholischesGetraenk) o;
-        return Float.compare(that.alkoholgehalt, alkoholgehalt) == 0;
+        if (this == o){
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()){
+            return false;
+        }
+        if (!super.equals(o)){
+            return false;
+        }
+        AlkoholischesGetraenk tmp = (AlkoholischesGetraenk) o;
+        return Float.compare(tmp.alkoholgehalt, alkoholgehalt) == 0;
     }
 
     @Override

@@ -1,3 +1,4 @@
+package ueb16;
 import java.util.Objects;
 
 public class Wein extends AlkoholischesGetraenk{
@@ -30,11 +31,17 @@ public class Wein extends AlkoholischesGetraenk{
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-        Wein wein = (Wein) o;
-        return Objects.equals(weingut, wein.weingut);
+        if (this == o){
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()){
+            return false;
+        }
+        if (!super.equals(o)){
+            return false;
+        }
+        Wein tmp = (Wein) o;
+        return weingut.equals(tmp.weingut);
     }
 
     @Override

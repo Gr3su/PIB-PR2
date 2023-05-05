@@ -1,3 +1,5 @@
+package ueb16;
+
 public class Weisswein extends Wein {
 
     public Weisswein(){
@@ -8,6 +10,10 @@ public class Weisswein extends Wein {
         super(weingut, alkoholgehalt, name);
     }
 
+    @Override
+    public boolean equals(Object o){
+        return super.equals(o);
+    }
     @Override
     public String toString() {
         return super.toString() + "Wein = Weisswein";

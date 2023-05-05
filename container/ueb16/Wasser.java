@@ -1,3 +1,4 @@
+package ueb16;
 import java.util.Objects;
 
 public class Wasser extends AlkoholfreiesGetraenk{
@@ -30,11 +31,17 @@ public class Wasser extends AlkoholfreiesGetraenk{
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-        Wasser wasser = (Wasser) o;
-        return Objects.equals(quelle, wasser.quelle);
+        if (this == o){
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()){
+            return false;
+        }
+        if (!super.equals(o)){
+            return false;
+        }
+        Wasser tmp = (Wasser) o;
+        return quelle.equals(tmp.quelle);
     }
 
     @Override

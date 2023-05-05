@@ -1,3 +1,4 @@
+package ueb16;
 import java.util.Objects;
 
 public abstract class Getraenk {
@@ -21,10 +22,14 @@ public abstract class Getraenk {
     }
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Getraenk getraenk = (Getraenk) o;
-        return Objects.equals(name, getraenk.name);
+        if (this == o){
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()){
+            return false;
+        }
+        Getraenk tmp = (Getraenk) o;
+        return name.equals(tmp.name);
     }
 
     @Override

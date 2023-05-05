@@ -1,3 +1,5 @@
+package ueb16;
+
 public class Softdrink extends AlkoholfreiesGetraenk{
 
     private float zuckergehalt;
@@ -29,11 +31,17 @@ public class Softdrink extends AlkoholfreiesGetraenk{
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-        Softdrink softdrink = (Softdrink) o;
-        return Float.compare(softdrink.zuckergehalt, zuckergehalt) == 0;
+        if (this == o){
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()){
+            return false;
+        }
+        if (!super.equals(o)){
+            return false;
+        }
+        Softdrink tmp = (Softdrink) o;
+        return Float.compare(tmp.zuckergehalt, zuckergehalt) == 0;
     }
 
     @Override

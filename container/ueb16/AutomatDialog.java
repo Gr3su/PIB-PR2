@@ -92,7 +92,7 @@ public class AutomatDialog {
                 System.err.println("Fehler in Dialog:");
                 System.err.println(e.getMessage());
             }
-            catch(GetraenkeException e){
+            catch(GetraenkException e){
                 System.err.println("Fehler in Getraenk-Erstellung:");
                 System.err.println(e.getMessage());
             }

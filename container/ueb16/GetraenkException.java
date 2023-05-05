@@ -1,3 +1,5 @@
+package ueb16;
+
 public class GetraenkException extends  RuntimeException {
 
     //Errors

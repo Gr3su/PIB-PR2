@@ -1,4 +1,4 @@
-import java.util.Objects;
+package ueb16;
 
 public abstract class AlkoholfreiesGetraenk extends Getraenk {
 
@@ -30,16 +30,17 @@ public abstract class AlkoholfreiesGetraenk extends Getraenk {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-        AlkoholfreiesGetraenk that = (AlkoholfreiesGetraenk) o;
-        return Objects.equals(hersteller, that.hersteller);
-    }
-
-    @Override
-    public int hashCode() {
-        return 0;
+        if (this == o){
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()){
+            return false;
+        }
+        if (!super.equals(o)){
+            return false;
+        }
+        AlkoholfreiesGetraenk tmp = (AlkoholfreiesGetraenk) o;
+        return hersteller.equals(tmp.hersteller);
     }
 
     @Override
