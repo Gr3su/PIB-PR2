@@ -1,7 +1,5 @@
 package ueb16;
 
-import ueb15.ErrorMessages;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -11,7 +9,7 @@ import java.util.Scanner;
  * @author Yannick Gross / Tim Mueller
  * @version 05.05.2023 / 13:00Uhr
  */
-public class AutomatDialog {
+public class AutomatDialog <T extends Getraenk>{
     //Prompts
     private static final String AUSGABE_HAUPTMENUE          = "0 - Dialog beenden\n" +
                                                                 "1 - Automat erstellen\n" +
@@ -46,22 +44,33 @@ public class AutomatDialog {
 
     //Attributes
     private Scanner scanner;
-    private ArrayList<Getraenkeautomat<?>> automaten;
+    private static boolean killProgram = false;
+    private Getraenkeautomat<T> automat;
+    //private ArrayList<Getraenkeautomat> automaten;
+
 
     private AutomatDialog(){
         this.scanner = new Scanner(System.in);
-        automaten = new ArrayList<>();
+    }
+
+    private AutomatDialog(Getraenkeautomat<T> automat){
+        this.automat = automat;
+        this.scanner = new Scanner(System.in);
     }
 
     public void start(){
         byte option;
 
-        while(true){
+        while(!killProgram){
             option = -1;
 
             try{
                 option = readByte(AUSGABE_HAUPTMENUE);
                 DialogException.validateMenueOption(option);
+                if(automat == null &&
+                    option != 1){
+                    option = 1;
+                }
 
                 switch(option){
                     case 0:
@@ -72,7 +81,7 @@ public class AutomatDialog {
                         break;
 
                     case 2:
-                        System.out.println(automatenAuswahl());
+                        System.out.println(automat);
                         break;
 
                     case 3:
@@ -80,7 +89,8 @@ public class AutomatDialog {
                         break;
 
                     case 4:
-                        System.out.println(automatenAuswahl().flascheAusgeben());
+                        if(automat != null)
+                            System.out.println(automat.flascheAusgeben());
                         break;
                 }
             }
@@ -103,64 +113,60 @@ public class AutomatDialog {
         }
     }
 
-    private void automatErstellen(){
+    private void automatErstellen() {
+
         int kapazitaet = readInt(EINGABE_KAPAZITAET);
         byte getraenk = readByte(EINGABE_AUTOMAT_GETRAENK);
 
-        switch (getraenk){
-            case 0:
-                automaten.add(new Getraenkeautomat<Getraenk>(kapazitaet));
-                break;
-
-            case 1:
-                automaten.add(new Getraenkeautomat<AlkoholischesGetraenk>(kapazitaet));
-                break;
-
-            case 2:
-                automaten.add(new Getraenkeautomat<AlkoholfreiesGetraenk>(kapazitaet));
-                break;
-
-            case 3:
-                automaten.add(new Getraenkeautomat<Wasser>(kapazitaet));
-                break;
-
-            case 4:
-                automaten.add(new Getraenkeautomat<Softdrink>(kapazitaet));
-                break;
-
-            case 5:
-                automaten.add(new Getraenkeautomat<Bier>(kapazitaet));
-                break;
-
-            case 6:
-                automaten.add(new Getraenkeautomat<Wein>(kapazitaet));
-                break;
-
-            case 7:
-                automaten.add(new Getraenkeautomat<Rotwein>(kapazitaet));
-                break;
-
-            case 8:
-                automaten.add(new Getraenkeautomat<Weisswein>(kapazitaet));
-                break;
-
-
+        if (getraenk == 0){
+            Getraenkeautomat<Getraenk> tmp = new Getraenkeautomat<>(kapazitaet);
+            new AutomatDialog<Getraenk>(tmp).start();
+            killProgram = true;
         }
-    }
-
-    public Getraenkeautomat automatenAuswahl(){
-        for(int i = 0; i < automaten.size(); i++){
-            System.out.println(i + " : " + automaten.get(i) + "\n");
+        else if(getraenk == 1) {
+            Getraenkeautomat<AlkoholischesGetraenk> tmp = new Getraenkeautomat<>(kapazitaet);
+            new AutomatDialog<AlkoholischesGetraenk>(tmp).start();
+            killProgram = true;
         }
-
-        int tmp = readInt(EINGABE_AUTOMATEN_AUSWAHL);
-        DialogException.validateAutomatSelection(automaten.size(), tmp);
-
-        return automaten.get(tmp);
+        else if(getraenk == 2) {
+            Getraenkeautomat<AlkoholfreiesGetraenk> tmp = new Getraenkeautomat<>(kapazitaet);
+            new AutomatDialog<AlkoholfreiesGetraenk>(tmp).start();
+            killProgram = true;
+        }
+        else if(getraenk == 3) {
+            Getraenkeautomat<Wasser> tmp = new Getraenkeautomat<>(kapazitaet);
+            new AutomatDialog<Wasser>(tmp).start();
+            killProgram = true;
+        }
+        else if(getraenk == 4) {
+            Getraenkeautomat<Softdrink> tmp = new Getraenkeautomat<>(kapazitaet);
+            new AutomatDialog<Softdrink>(tmp).start();
+            killProgram = true;
+        }
+        else if(getraenk == 5) {
+            Getraenkeautomat<Bier> tmp = new Getraenkeautomat<>(kapazitaet);
+            new AutomatDialog<Bier>(tmp).start();
+            killProgram = true;
+        }
+        else if(getraenk == 6) {
+            Getraenkeautomat<Wein> tmp = new Getraenkeautomat<>(kapazitaet);
+            new AutomatDialog<Wein>(tmp).start();
+            killProgram = true;
+        }
+        else if(getraenk == 7) {
+            Getraenkeautomat<Rotwein> tmp = new Getraenkeautomat<>(kapazitaet);
+            new AutomatDialog<Rotwein>(tmp).start();
+            killProgram = true;
+        }
+        else if(getraenk == 8) {
+            Getraenkeautomat<Weisswein> tmp = new Getraenkeautomat<>(kapazitaet);
+            new AutomatDialog<Weisswein>(tmp).start();
+            killProgram = true;
+        }
     }
 
     private void automatFuellen(){
-        Getraenkeautomat automat = automatenAuswahl();
+
         int getraenkeWahl = readInt(EINGABE_GETRANK_AUSWAHL);
         DialogException.validateGetraenkBeiFlasche(getraenkeWahl);
 
@@ -171,11 +177,12 @@ public class AutomatDialog {
 
             if(getraenkeWahl == 0){
                 String quelle = readString("Wasserquelle:");
-                automat.flascheEinlegen(new Flasche<Wasser>(new Wasser(quelle, hersteller, name)));
+                Flasche<? extends T> p = new Flasche<Wasser>(new Wasser(quelle, hersteller, name));
+                automat.flascheEinlegen(p);
             }
             else{
                 float zuckergehalt = readFloat("Zuckergehalt:");
-                automat.flascheEinlegen(new Flasche<Softdrink>(new Softdrink(zuckergehalt, hersteller, name)));
+                automat.flascheEinlegen((Flasche<? extends T>) new Flasche<Softdrink>(new Softdrink(zuckergehalt, hersteller, name)));
             }
         }
 
@@ -184,24 +191,35 @@ public class AutomatDialog {
 
             if(getraenkeWahl == 2){
                 String brauerei = readString("Name der Brauerei:");
-                automat.flascheEinlegen(new Flasche<Bier>(new Bier(brauerei, alkoholGehalt, name)));
+                automat.flascheEinlegen((Flasche<? extends T>) new Flasche<>(new Bier(brauerei, alkoholGehalt, name)));
             }
             else{
                 String weingut = readString("Weingut:");
 
                 if(getraenkeWahl == 3){
-                    automat.flascheEinlegen(new Flasche<Wein>(weingut, alkoholGehalt, name));
+                    automat.flascheEinlegen((Flasche<? extends T>) new Flasche<>(new Wein(weingut, alkoholGehalt, name)));
                 }
                 else if (getraenkeWahl == 4) {
-                    automat.flascheEinlegen(new Flasche<Rotwein>(weingut, alkoholGehalt, name));
+                    automat.flascheEinlegen((Flasche<? extends T>) new Flasche<>(new Rotwein(weingut, alkoholGehalt, name)));
                 }
                 else if (getraenkeWahl == 5) {
-                    automat.flascheEinlegen(new Flasche<Weisswein>(weingut, alkoholGehalt, name));
+                    automat.flascheEinlegen((Flasche<? extends T>) new Flasche<>(new Weisswein(weingut, alkoholGehalt, name)));
                 }
             }
         }
     }
+/*
+    public Getraenkeautomat automatenAuswahl(){
+        for(int i = 0; i < automaten.size(); i++){
+            System.out.println(i + " : " + automaten.get(i) + "\n");
+        }
 
+        int tmp = readInt(EINGABE_AUTOMATEN_AUSWAHL);
+        DialogException.validateAutomatSelection(automaten.size(), tmp);
+
+        return automaten.get(tmp);
+    }
+*/
     private int readInt(String prompt){
         System.out.println(prompt);
 
