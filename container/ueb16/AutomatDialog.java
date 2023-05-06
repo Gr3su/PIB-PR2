@@ -1,6 +1,5 @@
 package ueb16;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -169,6 +168,7 @@ public class AutomatDialog <T extends Getraenk>{
         }
     }
 
+    @SuppressWarnings("unchecked cast")
     private void automatFuellen(){
 
         int getraenkeWahl = readInt(EINGABE_GETRANK_AUSWAHL);
@@ -176,10 +176,10 @@ public class AutomatDialog <T extends Getraenk>{
 
         String name = readString("Name des Getraenks:");
 
-        if(getraenkeWahl < 2 && typeWahl < 2){
+        if(getraenkeWahl < 2){
             String hersteller = readString("Name des Herstellers:");
 
-            if(getraenkeWahl == 0 && typeWahl == 0){
+            if(getraenkeWahl == 0){
                 String quelle = readString("Wasserquelle:");
                 automat.flascheEinlegen((Flasche<? extends T>) new Flasche<Wasser>(new Wasser(quelle, hersteller, name)));
             }
@@ -199,13 +199,13 @@ public class AutomatDialog <T extends Getraenk>{
             else{
                 String weingut = readString("Weingut:");
 
-                if(getraenkeWahl == 3 && typeWahl == 3){
+                if(getraenkeWahl == 3 && typeWahl >= 3){
                     automat.flascheEinlegen((Flasche<? extends T>) new Flasche<>(new Wein(weingut, alkoholGehalt, name)));
                 }
-                else if (getraenkeWahl == 4 && typeWahl == 4) {
+                else if (getraenkeWahl == 4 && typeWahl >= 3) {
                     automat.flascheEinlegen((Flasche<? extends T>) new Flasche<>(new Rotwein(weingut, alkoholGehalt, name)));
                 }
-                else if (getraenkeWahl == 5 && typeWahl == 5) {
+                else if (getraenkeWahl == 5 && typeWahl >= 3) {
                     automat.flascheEinlegen((Flasche<? extends T>) new Flasche<>(new Weisswein(weingut, alkoholGehalt, name)));
                 }
             }

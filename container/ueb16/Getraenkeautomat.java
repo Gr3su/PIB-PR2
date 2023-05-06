@@ -11,6 +11,7 @@ import java.util.ArrayList;
  * @param <T> Getraenke Typ der im Automat liegen darf.
  */
 public class Getraenkeautomat <T extends Getraenk> {
+    private T T;
     private ArrayList<Flasche<?>> flaschenlager;
     private int kapazitaet;
 
@@ -20,6 +21,7 @@ public class Getraenkeautomat <T extends Getraenk> {
     public Getraenkeautomat(){
         flaschenlager = new ArrayList<>();
         kapazitaet = 30;
+        T = null;
     }
 
     /**
@@ -31,7 +33,6 @@ public class Getraenkeautomat <T extends Getraenk> {
         flaschenlager = new ArrayList<>();
         setKapazitaet(kapazitaet);
     }
-
     /**
      * Nimmt nur eine Flasche des passenden Types entgegen.
      * Prueft ob Flasche voll ist und ob Kapazitaet noch nicht ausgeschoepft ist.

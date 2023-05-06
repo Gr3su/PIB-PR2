@@ -1,5 +1,4 @@
 package ueb16;
-import java.util.Objects;
 
 public class Wein extends AlkoholischesGetraenk{
 
