@@ -176,10 +176,10 @@ public class AutomatDialog <T extends Getraenk>{
 
         String name = readString("Name des Getraenks:");
 
-        if(getraenkeWahl < 2){
+        if(getraenkeWahl < 2 && typeWahl < 2){
             String hersteller = readString("Name des Herstellers:");
 
-            if(getraenkeWahl == 0){
+            if(getraenkeWahl == 0 && typeWahl == 0){
                 String quelle = readString("Wasserquelle:");
                 automat.flascheEinlegen((Flasche<? extends T>) new Flasche<Wasser>(new Wasser(quelle, hersteller, name)));
             }
