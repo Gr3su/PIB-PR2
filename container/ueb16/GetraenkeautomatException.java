@@ -12,6 +12,7 @@ public class GetraenkeautomatException extends RuntimeException{
     private static final String ERROR_KAPAZITAET_ERREICHT = "Getraenkeautomat ist bereits voll.";
     private static final String ERROR_FLASCHE_NICHT_VOLL = "Die Flasche ist nicht gefuellt.";
     private static final String ERROR_AUTOMAT_LEER = "Der Automat besitzt keine Flaschen mehr.";
+    private static final String ERROR_FLASCHE_NULL = "Flasche darf nicht null sein.";
 
     public GetraenkeautomatException(){
         super();
@@ -59,9 +60,12 @@ public class GetraenkeautomatException extends RuntimeException{
      *
      * @param flasche
      */
-    public static void flascheVoll(Flasche flasche){
+    public static void flascheValidierung(Flasche flasche){
         if(! flasche.istVoll()){
             throw new GetraenkeautomatException(ERROR_FLASCHE_NICHT_VOLL);
+        }
+        if(flasche == null){
+            throw new GetraenkeautomatException(ERROR_FLASCHE_NULL);
         }
     }
 }

@@ -40,6 +40,7 @@ public class AutomatDialog <T extends Getraenk>{
     private static final String ERROR_KEIN_BYTE     = "Eingegebene Zeichen sind kein byte.";
     private static final String ERROR_KEIN_FLOAT    = "Eingegebene Zeichen sind kein float.";
     private static final String ERROR_KEIN_INT      = "Eingegebene Zeichen sind kein int.";
+    private static final String ERROR_AUTOMATEN_WAHL= "Automat kann gewuenschtes Getraenk nicht halten.";
 
     //Attributes
     private Scanner scanner;
@@ -176,40 +177,47 @@ public class AutomatDialog <T extends Getraenk>{
 
         String name = readString("Name des Getraenks:");
 
-        if(getraenkeWahl < 2 && typeWahl < 2){
+        if(getraenkeWahl < 2 && (
+                typeWahl == 0 ||
+                typeWahl > 1 &&
+                typeWahl < 5)){
             String hersteller = readString("Name des Herstellers:");
 
-            if(getraenkeWahl == 0 && typeWahl == 0){
+            if(getraenkeWahl == 0){
                 String quelle = readString("Wasserquelle:");
-                automat.flascheEinlegen((Flasche<? extends T>) new Flasche<Wasser>(new Wasser(quelle, hersteller, name)));
+                automat.flascheEinlegen((Flasche<T>)new Flasche<Wasser>(new Wasser(quelle, hersteller, name)));
             }
-            else if(typeWahl == 1){
+            else{
                 float zuckergehalt = readFloat("Zuckergehalt:");
                 automat.flascheEinlegen((Flasche<? extends T>) new Flasche<Softdrink>(new Softdrink(zuckergehalt, hersteller, name)));
             }
+            return;
         }
 
-        else if(getraenkeWahl > 1 && typeWahl > 1){
+        else if(getraenkeWahl > 1){
             float alkoholGehalt = readFloat("Alkoholgehalt:");
 
-            if(getraenkeWahl == 2 && typeWahl == 2){
+            if(getraenkeWahl == 2 && typeWahl == 5){
                 String brauerei = readString("Name der Brauerei:");
                 automat.flascheEinlegen((Flasche<? extends T>) new Flasche<>(new Bier(brauerei, alkoholGehalt, name)));
             }
             else{
                 String weingut = readString("Weingut:");
 
-                if(getraenkeWahl == 3 && typeWahl >= 3){
+                if(getraenkeWahl == 3 && typeWahl >= 6){
                     automat.flascheEinlegen((Flasche<? extends T>) new Flasche<>(new Wein(weingut, alkoholGehalt, name)));
                 }
-                else if (getraenkeWahl == 4 && typeWahl >= 3) {
+                else if (getraenkeWahl == 4 && typeWahl >= 6) {
                     automat.flascheEinlegen((Flasche<? extends T>) new Flasche<>(new Rotwein(weingut, alkoholGehalt, name)));
                 }
-                else if (getraenkeWahl == 5 && typeWahl >= 3) {
+                else if (getraenkeWahl == 5 && typeWahl >= 6) {
                     automat.flascheEinlegen((Flasche<? extends T>) new Flasche<>(new Weisswein(weingut, alkoholGehalt, name)));
                 }
             }
+            return;
         }
+
+        throw new DialogException(ERROR_AUTOMATEN_WAHL);
     }
 /*
     public Getraenkeautomat automatenAuswahl(){

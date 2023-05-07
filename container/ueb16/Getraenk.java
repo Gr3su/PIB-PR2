@@ -35,6 +35,6 @@ public abstract class Getraenk {
     @Override
     public String toString() {
         return
-                "Name = '" + name +"\n";
+                "Name = " + name +"\n";
     }
 }
