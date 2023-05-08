@@ -10,6 +10,9 @@ package ueb16;
  */
 
 public class Flasche <T extends Getraenk>{
+    //Prompts
+    private static final String ERROR_INHALT_NULL   = "Der Inhalt darf nicht null sein.";
+
     //Attributes
     private T inhalt;
     private boolean istVoll;
@@ -24,6 +27,10 @@ public class Flasche <T extends Getraenk>{
      * @param inhalt
      */
     public void fuellen(T inhalt){
+        if(inhalt == null){
+            throw new IllegalArgumentException(ERROR_INHALT_NULL);
+        }
+
         this.inhalt = inhalt;
         istVoll = true;
     }

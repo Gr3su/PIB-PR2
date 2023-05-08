@@ -49,7 +49,6 @@ public class AutomatDialog <T extends Getraenk>{
     private Getraenkeautomat<T> automat;
     //private ArrayList<Getraenkeautomat> automaten;
 
-
     private AutomatDialog(){
         this.scanner = new Scanner(System.in);
         typeWahl = -1;
@@ -174,46 +173,84 @@ public class AutomatDialog <T extends Getraenk>{
 
         int getraenkeWahl = readInt(EINGABE_GETRANK_AUSWAHL);
         DialogException.validateGetraenkBeiFlasche(getraenkeWahl);
+        checkWahl(getraenkeWahl);
 
         String name = readString("Name des Getraenks:");
 
-        if(getraenkeWahl < 2 && (
-                typeWahl == 0 ||
-                typeWahl > 1 &&
-                typeWahl < 5)){
+        if(getraenkeWahl < 2){
             String hersteller = readString("Name des Herstellers:");
 
             if(getraenkeWahl == 0){
                 String quelle = readString("Wasserquelle:");
-                automat.flascheEinlegen((Flasche<T>)new Flasche<Wasser>(new Wasser(quelle, hersteller, name)));
+                automat.flascheEinlegen((Flasche<? extends T>)new Flasche<Wasser>(new Wasser(quelle, hersteller, name)));
             }
             else{
                 float zuckergehalt = readFloat("Zuckergehalt:");
                 automat.flascheEinlegen((Flasche<? extends T>) new Flasche<Softdrink>(new Softdrink(zuckergehalt, hersteller, name)));
             }
-            return;
         }
 
         else if(getraenkeWahl > 1){
             float alkoholGehalt = readFloat("Alkoholgehalt:");
 
-            if(getraenkeWahl == 2 && typeWahl == 5){
+            if(getraenkeWahl == 2){
                 String brauerei = readString("Name der Brauerei:");
                 automat.flascheEinlegen((Flasche<? extends T>) new Flasche<>(new Bier(brauerei, alkoholGehalt, name)));
             }
-            else{
+            else if(getraenkeWahl > 2){
                 String weingut = readString("Weingut:");
 
-                if(getraenkeWahl == 3 && typeWahl >= 6){
+                if(getraenkeWahl == 3){
                     automat.flascheEinlegen((Flasche<? extends T>) new Flasche<>(new Wein(weingut, alkoholGehalt, name)));
                 }
-                else if (getraenkeWahl == 4 && typeWahl >= 6) {
+                else if (getraenkeWahl == 4) {
                     automat.flascheEinlegen((Flasche<? extends T>) new Flasche<>(new Rotwein(weingut, alkoholGehalt, name)));
                 }
-                else if (getraenkeWahl == 5 && typeWahl >= 6) {
+                else if (getraenkeWahl == 5) {
                     automat.flascheEinlegen((Flasche<? extends T>) new Flasche<>(new Weisswein(weingut, alkoholGehalt, name)));
                 }
             }
+
+        }
+    }
+
+    public void checkWahl(int wahl){
+        if(wahl == 0 && (
+            typeWahl == 0 ||
+            typeWahl == 2 ||
+            typeWahl == 3)){
+            return;
+        }
+        if(wahl == 1 && (
+            typeWahl == 0 ||
+            typeWahl == 2 ||
+            typeWahl == 4)){
+            return;
+        }
+        if(wahl == 2 && (
+            typeWahl == 0 ||
+            typeWahl == 1 ||
+            typeWahl == 5)){
+            return;
+        }
+        if(wahl == 3 &&(
+            typeWahl == 0 ||
+            typeWahl == 1 ||
+            typeWahl == 6)){
+            return;
+        }
+        if(wahl == 4 && (
+            typeWahl == 0 ||
+            typeWahl == 1 ||
+            typeWahl == 6 ||
+            typeWahl == 7)){
+            return;
+        }
+        if(wahl == 5 &&(
+            typeWahl == 0 ||
+            typeWahl == 1 ||
+            typeWahl == 6 ||
+            typeWahl == 8)){
             return;
         }
 
