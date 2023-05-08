@@ -42,7 +42,6 @@ public class Getraenkeautomat <T extends Getraenk> {
         GetraenkeautomatException.flascheValidierung(flasche);
         
         flaschenlager.add(flasche);
-        kapazitaet++;
     }
 
     /**
