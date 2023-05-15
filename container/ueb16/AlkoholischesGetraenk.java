@@ -27,7 +27,7 @@ public abstract class AlkoholischesGetraenk extends Getraenk {
      * @param alkoholgehalt der Alkoholgehalt des Getränks
      * @throws GetraenkException falls der Alkoholgehalt negativ oder kein Float ist
      */
-    public AlkoholischesGetraenk(Float alkoholgehalt){
+    public AlkoholischesGetraenk(float alkoholgehalt){
         super();
         setAlkoholgehalt(alkoholgehalt);
     }
@@ -38,7 +38,7 @@ public abstract class AlkoholischesGetraenk extends Getraenk {
      * @param name der Name des Getränks
      * @throws GetraenkException falls der Alkoholgehalt negativ oder kein Float ist
      */
-    public AlkoholischesGetraenk(Float alkoholgehalt, String name){
+    public AlkoholischesGetraenk(float alkoholgehalt, String name){
         super(name);
         setAlkoholgehalt(alkoholgehalt);
     }
