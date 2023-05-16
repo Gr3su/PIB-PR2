@@ -1,6 +1,7 @@
 package ueb17;
+import static ueb17.ApplyAndPrint.applyAndPrint;
 
-public abstract class AAPExamples {
+public abstract class LambdaImplementations {
     public static void main(String[] args) {
         MyFunction quad = (x) -> x * x;
         MyFunction fac = (x) -> {
@@ -11,7 +12,7 @@ public abstract class AAPExamples {
             return sum;
         };
         MyFunction pot = (x) -> {
-            int sum = 0;
+            int sum = 1;
             for(int i = 0; i < x + 1; i++){
                 sum *= x;
             }
@@ -27,5 +28,10 @@ public abstract class AAPExamples {
           }
           return next;
         };
+
+        applyAndPrint(1, 10, quad);
+        applyAndPrint(1, 10, fac);
+        applyAndPrint(1, 9, pot);
+        applyAndPrint(1, 10, fib);
     }
 }
