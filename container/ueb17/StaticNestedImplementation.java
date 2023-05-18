@@ -2,6 +2,8 @@ package ueb17;
 import static ueb17.ApplyAndPrint.applyAndPrint;
 
 public abstract class StaticNestedImplementation {
+    private static final int MIN_TEST_VALUE = 1;
+    private static final int MAX_TEST_VALUE = 10;
 
     private static class quad implements MyFunction{
         @Override
@@ -43,9 +45,9 @@ public abstract class StaticNestedImplementation {
     }
 
     public static void main(String[] args) {
-        applyAndPrint(1, 10, new quad());
-        applyAndPrint(1, 10, new fac());
-        applyAndPrint(1, 9, new pot());
-        applyAndPrint(1, 10, new fib());
+        applyAndPrint(MIN_TEST_VALUE, MAX_TEST_VALUE, new quad());
+        applyAndPrint(MIN_TEST_VALUE, MAX_TEST_VALUE, new fac());
+        applyAndPrint(MIN_TEST_VALUE, MAX_TEST_VALUE, new pot());
+        applyAndPrint(MIN_TEST_VALUE, MAX_TEST_VALUE, new fib());
     }
 }

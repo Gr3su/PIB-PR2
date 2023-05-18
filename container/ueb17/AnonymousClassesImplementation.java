@@ -2,6 +2,9 @@ package ueb17;
 import static ueb17.ApplyAndPrint.applyAndPrint;
 
 public class AnonymousClassesImplementation {
+    private static final int MIN_TEST_VALUE = 1;
+    private static final int MAX_TEST_VALUE = 9;
+
     public static void main(String[] args) {
         MyFunction quad = new MyFunction() {
             @Override
@@ -41,9 +44,9 @@ public class AnonymousClassesImplementation {
             }
         };
 
-        applyAndPrint(1, 10, quad);
-        applyAndPrint(1, 10, fac);
-        applyAndPrint(1, 9, pot);
-        applyAndPrint(1, 10, fib);
+        applyAndPrint(MIN_TEST_VALUE, MAX_TEST_VALUE, quad);
+        applyAndPrint(MIN_TEST_VALUE, MAX_TEST_VALUE, fac);
+        applyAndPrint(MIN_TEST_VALUE, MAX_TEST_VALUE, pot);
+        applyAndPrint(MIN_TEST_VALUE, MAX_TEST_VALUE, fib);
     }
 }
