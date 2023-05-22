@@ -1,18 +1,25 @@
 package ueb17;
 import static ueb17.ApplyAndPrint.applyAndPrint;
 
+/**
+ * Implementierung der Funktionen Quadrieren, Fakultaet, Potenz und Fibonacci Folge
+ * als Static nested classes.
+ *
+ * @author Yannick Gross / Tim Mueller
+ * @version 20.05.2023
+ */
 public abstract class StaticNestedImplementation {
     private static final int MIN_TEST_VALUE = 1;
     private static final int MAX_TEST_VALUE = 10;
 
-    private static class quad implements MyFunction{
+    public static class Quadrieren implements MyFunction{
         @Override
         public int apply(int x){
             return x * x;
         }
     }
 
-    private static class fac implements MyFunction{
+    public static class Fakultaet implements MyFunction{
         @Override
         public int apply(int x){
             if (x == 0) {
@@ -22,7 +29,7 @@ public abstract class StaticNestedImplementation {
         }
     }
 
-    private static class pot implements MyFunction{
+    public static class Potenz implements MyFunction{
         @Override
         public int apply(int x){
             int sum = 1;
@@ -34,7 +41,7 @@ public abstract class StaticNestedImplementation {
         }
     }
 
-    private static class fib implements MyFunction{
+    public static class Fibonacci implements MyFunction{
         @Override
         public int apply(int x){
             if(x <= 2){
@@ -44,10 +51,15 @@ public abstract class StaticNestedImplementation {
         }
     }
 
+    /**
+     * Aufruf der applyAndPrint Methode mit den nested classes.
+     *
+     * @param args Kein Nutzen
+     */
     public static void main(String[] args) {
-        applyAndPrint(MIN_TEST_VALUE, MAX_TEST_VALUE, new quad());
-        applyAndPrint(MIN_TEST_VALUE, MAX_TEST_VALUE, new fac());
-        applyAndPrint(MIN_TEST_VALUE, MAX_TEST_VALUE, new pot());
-        applyAndPrint(MIN_TEST_VALUE, MAX_TEST_VALUE, new fib());
+        applyAndPrint(MIN_TEST_VALUE, MAX_TEST_VALUE, new Quadrieren());
+        applyAndPrint(MIN_TEST_VALUE, MAX_TEST_VALUE, new Fakultaet());
+        applyAndPrint(MIN_TEST_VALUE, MAX_TEST_VALUE, new Potenz());
+        applyAndPrint(MIN_TEST_VALUE, MAX_TEST_VALUE, new Fibonacci());
     }
 }

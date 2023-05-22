@@ -1,19 +1,31 @@
 package ueb17;
 import static ueb17.ApplyAndPrint.applyAndPrint;
 
+/**
+ * Implementierung der Funktionen Quadrieren, Fakultaet, Potenz und Fibonacci als
+ * anonyme Klassen.
+ *
+ * @author Yannick Gross / Tim Mueller
+ * @version 20.05.2023
+ */
 public class AnonymousClassesImplementation {
     private static final int MIN_TEST_VALUE = 1;
     private static final int MAX_TEST_VALUE = 9;
 
-    public static void main(String[] args) {
-        MyFunction quad = new MyFunction() {
+    private final MyFunction quadrieren;
+    private final MyFunction fakultaet;
+    private final MyFunction potenz;
+    private final MyFunction fibonacci;
+
+    public AnonymousClassesImplementation(){
+        quadrieren = new MyFunction() {
             @Override
             public int apply(int x) {
                 return x * x;
             }
         };
 
-        MyFunction fac = new MyFunction() {
+        fakultaet = new MyFunction() {
             @Override
             public int apply(int x) {
                 if (x == 0) {
@@ -23,7 +35,7 @@ public class AnonymousClassesImplementation {
             }
         };
 
-        MyFunction pot = new MyFunction() {
+        potenz = new MyFunction() {
             @Override
             public int apply(int x) {
                 int sum = 1;
@@ -34,7 +46,7 @@ public class AnonymousClassesImplementation {
             }
         };
 
-        MyFunction fib = new MyFunction() {
+        fibonacci = new MyFunction() {
             @Override
             public int apply(int x) {
                 if(x <= 2){
@@ -43,10 +55,30 @@ public class AnonymousClassesImplementation {
                 return apply(x - 1) + apply(x - 2);
             }
         };
+    }
 
-        applyAndPrint(MIN_TEST_VALUE, MAX_TEST_VALUE, quad);
-        applyAndPrint(MIN_TEST_VALUE, MAX_TEST_VALUE, fac);
-        applyAndPrint(MIN_TEST_VALUE, MAX_TEST_VALUE, pot);
-        applyAndPrint(MIN_TEST_VALUE, MAX_TEST_VALUE, fib);
+    public MyFunction getQuadrieren() {
+        return quadrieren;
+    }
+
+    public MyFunction getFakultaet() {
+        return fakultaet;
+    }
+
+    public MyFunction getPotenz() {
+        return potenz;
+    }
+
+    public MyFunction getFibonacci() {
+        return fibonacci;
+    }
+
+    public static void main(String[] args) {
+        AnonymousClassesImplementation anom = new AnonymousClassesImplementation();
+
+        applyAndPrint(MIN_TEST_VALUE, MAX_TEST_VALUE, anom.quadrieren);
+        applyAndPrint(MIN_TEST_VALUE, MAX_TEST_VALUE, anom.fakultaet);
+        applyAndPrint(MIN_TEST_VALUE, MAX_TEST_VALUE, anom.potenz);
+        applyAndPrint(MIN_TEST_VALUE, MAX_TEST_VALUE, anom.fibonacci);
     }
 }
