@@ -1,4 +1,6 @@
 package ueb17;
+import org.junit.runner.manipulation.NoTestsRemainException;
+
 import static ueb17.ApplyAndPrint.applyAndPrint;
 
 /**
@@ -9,6 +11,7 @@ import static ueb17.ApplyAndPrint.applyAndPrint;
  * @version 20.05.2023
  */
 public class AnonymousClassesImplementation {
+    private static final String ERROR_NOT_NAT = "x muss eine natuerliche Zahl sein.";
     private static final int MIN_TEST_VALUE = 1;
     private static final int MAX_TEST_VALUE = 9;
 
@@ -21,6 +24,10 @@ public class AnonymousClassesImplementation {
         quadrieren = new MyFunction() {
             @Override
             public int apply(int x) {
+                if(x < 0){
+                    throw new IllegalArgumentException(ERROR_NOT_NAT);
+                }
+
                 return x * x;
             }
         };
@@ -28,6 +35,9 @@ public class AnonymousClassesImplementation {
         fakultaet = new MyFunction() {
             @Override
             public int apply(int x) {
+                if(x < 0){
+                    throw new IllegalArgumentException(ERROR_NOT_NAT);
+                }
                 if (x == 0) {
                     return 1;
                 }
@@ -38,8 +48,11 @@ public class AnonymousClassesImplementation {
         potenz = new MyFunction() {
             @Override
             public int apply(int x) {
-                int sum = 1;
-                for(int i = 0; i < x + 1; i++){
+                if(x < 0){
+                    throw new IllegalArgumentException(ERROR_NOT_NAT);
+                }
+                int sum = x;
+                for(int i = 0; i < x; i++){
                     sum *= x;
                 }
                 return sum;
@@ -49,6 +62,9 @@ public class AnonymousClassesImplementation {
         fibonacci = new MyFunction() {
             @Override
             public int apply(int x) {
+                if(x < 0){
+                    throw new IllegalArgumentException(ERROR_NOT_NAT);
+                }
                 if(x <= 2){
                     return 1;
                 }

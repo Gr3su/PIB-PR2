@@ -9,13 +9,17 @@ import static ueb17.ApplyAndPrint.applyAndPrint;
  * @version 20.05.2023
  */
 public class Potenz implements MyFunction{
+    private static final String ERROR_NOT_NAT = "x muss eine natuerliche Zahl sein.";
     private static final int MIN_TEST_VALUE = 1;
     private static final int MAX_TEST_VALUE = 10;
 
     @Override
     public int apply(int x){
-        int sum = 1;
-        for(int i = 0; i < x + 1; i++){
+        if(x < 0){
+            throw new IllegalArgumentException(ERROR_NOT_NAT);
+        }
+        int sum = x;
+        for(int i = 0; i < x; i++){
             sum *= x;
         }
         return sum;
