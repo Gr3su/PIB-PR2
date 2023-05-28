@@ -53,6 +53,18 @@ public class Buch extends Artikel{
         this(artikelNr, 0, 0.0, titel, autor, verlag);
     }
 
+    public void setTitel(String titel) {
+        this.titel = titel;
+    }
+
+    public void setAutor(String autor) {
+        this.autor = autor;
+    }
+
+    public void setVerlag(String verlag) {
+        this.verlag = verlag;
+    }
+
     public String getTitel(){
         return titel;
     }
@@ -82,13 +94,12 @@ public class Buch extends Artikel{
      */
     @Override
     public boolean equals(Object obj){
-        super.equals(obj);
+        if( !super.equals(obj) ){
+            return false;
+        };
 
         if(this == obj){
             return true;
-        }
-        if(obj == null){
-            return false;
         }
         if(obj instanceof Buch){
             Buch newObj = (Buch)obj;

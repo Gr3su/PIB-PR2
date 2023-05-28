@@ -168,7 +168,7 @@ public class Ueb18Fassade {
      */
     public Artikel[] aufgabe_h_v(Lager lager) {
         Predicate<Artikel> filter = a -> a instanceof Buch;
-        BiPredicate<Artikel, Artikel> sort = (a,b) -> ((Buch)a).getAutor().compareToIgnoreCase(((Buch)b).getAutor()) < 0;
+        BiPredicate<Artikel, Artikel> sort = (a,b) -> ((Buch)a).getAutor().compareToIgnoreCase(((Buch)b).getAutor()) > 0;
 
         return lager.getArticles(filter, sort);
 
@@ -184,8 +184,10 @@ public class Ueb18Fassade {
      * @return Alle Buecher vom Autor autor und mit einem Preis, der zwischen minPreis und maxPreis liegt.
      */
     public Artikel[] aufgabe_h_vi(Lager lager, String gesuchterAutor, double minPreis, double maxPreis) {
-        Artikel [] filtered = lager.filterAll(a -> a instanceof Buch, a -> a.getPreis() >= minPreis &&
-                                                                        a.getPreis() <= maxPreis);
-        return filtered;
+        return lager.filterAll(a -> a instanceof Buch,
+                                a -> ((Buch)a).getAutor().equalsIgnoreCase(gesuchterAutor),
+                                a -> a.getPreis() >= minPreis &&
+                                a.getPreis() <= maxPreis);
+
     }
 }

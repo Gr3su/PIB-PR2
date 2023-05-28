@@ -1,6 +1,8 @@
 package ueb18;
 
 
+import java.util.Objects;
+
 /**
  * Klasse Artikel, die es erlaubt einen Artikel mit einer
  * Artikelnummer, Artikelart, Bestand und Preis zu erstellen.
@@ -188,6 +190,17 @@ public class Artikel{
             return "";
         }
         return art;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Artikel artikel = (Artikel) o;
+        return artikelNr == artikel.artikelNr &&
+                bestand == artikel.bestand &&
+                Double.compare(artikel.preis, preis) == 0 &&
+                Objects.equals(art, artikel.art);
     }
 
     /**

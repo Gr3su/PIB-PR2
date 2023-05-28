@@ -197,6 +197,15 @@ public class Lager{
         return lagerFeld[index];
     }
 
+    /**
+     * Gibt das Lager als komplettes Array zurueck
+     *
+     * @return Lager
+     */
+    public Artikel[] getLager(){
+        return lagerFeld;
+    }
+
     public int getLagerBestand(){
         return lagerBestand;
     }
@@ -271,8 +280,8 @@ public class Lager{
         int sortiertGroesse = getLagerBestand();
         Artikel[] sortiertesLager = lagerFeld.clone();
 
-        for(int i = 0; i < sortiertGroesse; i++){
-            for(int j = 0; j < sortiertGroesse - i; j++){
+        for(int i = 0; i < sortiertGroesse - 1; i++){
+            for(int j = 0; j < sortiertGroesse - i - 1; j++){
 
                 if(sortierKriterium.test(sortiertesLager[j], sortiertesLager[j+1])){
                     Artikel tempo = sortiertesLager[j];

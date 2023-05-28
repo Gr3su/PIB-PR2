@@ -82,13 +82,12 @@ public class Video extends Artikel{
      */
     @Override
     public boolean equals(Object obj){
-        super.equals(obj);
+        if( !super.equals(obj)){
+            return false;
+        };
 
         if(this == obj){
             return true;
-        }
-        if(obj == null){
-            return false;
         }
         if(obj instanceof Video){
             Video newObj = (Video)obj;

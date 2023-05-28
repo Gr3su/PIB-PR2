@@ -1,6 +1,8 @@
 package ueb18;
 
 
+import java.util.Objects;
+
 /**
  * CD Klasse die von Artikel erbt.
  *
@@ -83,13 +85,12 @@ public class CD extends Artikel{
      */
     @Override
     public boolean equals(Object obj){
-        super.equals(obj);
+        if( !super.equals(obj)){
+            return false;
+        };
 
         if(this == obj){
             return true;
-        }
-        if(obj == null){
-            return false;
         }
         if(obj instanceof CD){
             CD newObj = (CD)obj;
