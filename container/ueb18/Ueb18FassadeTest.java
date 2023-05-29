@@ -68,7 +68,7 @@ class Ueb18FassadeTest {
     }
 
     @Test
-    void aufgabe_c_i() {
+    public void aufgabe_c_i() {
         publicLager = new Lager();
         publicLager.legeAnArtikel(video_bestand3_preis5);
         publicLager.legeAnArtikel(cd_bestand3_preis6);
@@ -98,7 +98,7 @@ class Ueb18FassadeTest {
     }
 
     @Test
-    void aufgabe_c_ii() {
+    public void aufgabe_c_ii() {
         Lager erwartetesLager = new Lager();
         erwartetesLager.legeAnArtikel(s_cd_bestand3_preis6);
         erwartetesLager.legeAnArtikel(s_cd_bestand4_preis5);
@@ -117,7 +117,7 @@ class Ueb18FassadeTest {
     }
 
     @Test
-    void aufgabe_c_iii() {
+    public void aufgabe_c_iii() {
         Lager erwartetesLager = new Lager();
 
         erwartetesLager.legeAnArtikel(s_cd_bestand3_preis6);
@@ -140,7 +140,7 @@ class Ueb18FassadeTest {
     }
 
     @Test
-    void aufgabe_c_iv() {
+    public void aufgabe_c_iv() {
         Lager erwartetesLager = new Lager();
 
         erwartetesLager.legeAnArtikel(s_cd_bestand3_preis6);
@@ -164,7 +164,7 @@ class Ueb18FassadeTest {
     }
 
     @Test
-    void aufgabe_h_i() {
+    public void aufgabe_h_i() {
         Lager erwartetesLager = new Lager();
         erwartetesLager.legeAnArtikel(s_cd_bestand3_preis6);
         erwartetesLager.legeAnArtikel(s_cd_bestand4_preis5);
@@ -184,7 +184,7 @@ class Ueb18FassadeTest {
     }
 
     @Test
-    void aufgabe_h_ii() {
+    public void aufgabe_h_ii() {
         Lager erwartetesLager = new Lager();
         erwartetesLager.legeAnArtikel(s_cd_bestand3_preis6);
         erwartetesLager.legeAnArtikel(s_cd_bestand4_preis5);
@@ -213,7 +213,7 @@ class Ueb18FassadeTest {
     }
 
     @Test
-    void aufgabe_h_iii() {
+    public void aufgabe_h_iii() {
         Lager erwartetesLager = new Lager();
         erwartetesLager.legeAnArtikel(s_cd_bestand3_preis6);
         erwartetesLager.legeAnArtikel(s_cd_bestand4_preis5);
@@ -235,7 +235,7 @@ class Ueb18FassadeTest {
     }
 
     @Test
-    void aufgabe_h_iv() {
+    public void aufgabe_h_iv() {
         Lager erwartetesLager = new Lager();
         erwartetesLager.legeAnArtikel(s_cd_bestand3_preis6);
         erwartetesLager.legeAnArtikel(s_cd_bestand4_preis5);
@@ -267,7 +267,7 @@ class Ueb18FassadeTest {
     }
 
     @Test
-    void aufgabe_h_v() {
+    public void aufgabe_h_v() {
         Lager lager = new Lager(15);
         lager.legeAnArtikel(new Buch(1239,"A","Habbz","A"));
         lager.legeAnArtikel(new Buch(1236,"A","c","A"));
@@ -299,7 +299,7 @@ class Ueb18FassadeTest {
     }
 
     @Test
-    void aufgabe_h_vi() {
+    public void aufgabe_h_vi() {
         Lager lager = new Lager();
         lager.legeAnArtikel(new Buch(1231, 1.0, "Bla", "Harry", "Klett"));
         lager.legeAnArtikel(new Buch(1232, 2.0, "Bla", "Potter", "Klett"));

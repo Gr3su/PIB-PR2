@@ -361,7 +361,7 @@ public class Lager{
      *
      * @return Sortiertes Array mit den gewuenschten Artikeln
      */
-    public Artikel[] getArticles(Predicate<Artikel> filterKriterium,BiPredicate <Artikel, Artikel> sortierKriterium){
+    public Artikel[] getArticles(Predicate<Artikel> filterKriterium, BiPredicate <Artikel, Artikel> sortierKriterium){
         Artikel[] sortiertesLager = getSorted(sortierKriterium);
 
         return filterAnwendung(filterKriterium, sortiertesLager);
