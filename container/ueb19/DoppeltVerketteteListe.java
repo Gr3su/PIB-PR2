@@ -1,9 +1,7 @@
 package ueb19;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
+import java.lang.reflect.Array;
+import java.util.*;
 
 public class DoppeltVerketteteListe <E> implements List<E> {
 
@@ -29,14 +27,11 @@ public class DoppeltVerketteteListe <E> implements List<E> {
 
     @Override
     public boolean contains(Object o) {
-        Node<? extends E> iteratorPoint = head;
 
-        while(iteratorPoint != null){
-            if(iteratorPoint.getValue().equals(o)){
+        for(E item: this){
+            if(item.equals(o)){
                 return true;
             }
-
-            iteratorPoint = iteratorPoint.getNext();
         }
 
         return false;
@@ -44,7 +39,8 @@ public class DoppeltVerketteteListe <E> implements List<E> {
 
     @Override
     public Iterator<E> iterator() {
-        throw new java.lang.UnsupportedOperationException();
+
+        return new DVLIterator();
     }
 
     @Override
@@ -60,16 +56,12 @@ public class DoppeltVerketteteListe <E> implements List<E> {
 
         try{
             if(a.length < size) {
-                a = (T[]) new Object[size];
+                a = (T[]) Array.newInstance(a.getClass().getComponentType(), size);
             }
 
-            Node currentNode = head;
             int i = 0;
-
-            while(currentNode != null){
-                a[i] = (T) currentNode.getValue();
-                currentNode = currentNode.getNext();
-                i++;
+            for(E item: this){
+                a[i++] = (T) item;
             }
 
             if(i < size - 1){
@@ -86,6 +78,10 @@ public class DoppeltVerketteteListe <E> implements List<E> {
 
     @Override
     public boolean add(E e) {
+        if(e == null){
+            throw new NullPointerException();
+        }
+
         Node<E> newNode = new Node<>(e);
         if(head == null){
             head = newNode;
@@ -108,19 +104,13 @@ public class DoppeltVerketteteListe <E> implements List<E> {
             throw new NullPointerException();
         }
 
-        Node<E> iteratorPos = head;
-
-        while(iteratorPos != null){
-            if(iteratorPos.getValue().equals(o)){
-                Node<E> previous = iteratorPos.getPrevious();
-                Node<E> next = iteratorPos.getNext();
-
-                previous.setNext(next);
-                next.setPrevious(previous);
+        ListIterator<E> iterator = new DVLListIterator();
+        while(iterator.hasNext()){
+            if(iterator.next().equals(o)){
+                remove(iterator.previousIndex());
                 return true;
             }
 
-            iteratorPos = iteratorPos.getNext();
         }
 
         return false;
@@ -128,13 +118,19 @@ public class DoppeltVerketteteListe <E> implements List<E> {
 
     @Override
     public boolean containsAll(Collection<?> c) {
-        return false;
+        throw new java.lang.UnsupportedOperationException();
     }
 
     @Override
     public boolean addAll(Collection<? extends E> c) {
+        if(c == null || c.size() == 0){
+            return false;
+        }
 
         for (E item : c) {
+            if(item == null){
+                throw new NullPointerException();
+            }
             add(item);
         }
 
@@ -143,17 +139,17 @@ public class DoppeltVerketteteListe <E> implements List<E> {
 
     @Override
     public boolean addAll(int index, Collection<? extends E> c) {
-        return false;
+        throw new java.lang.UnsupportedOperationException();
     }
 
     @Override
     public boolean removeAll(Collection<?> c) {
-        return false;
+        throw new java.lang.UnsupportedOperationException();
     }
 
     @Override
     public boolean retainAll(Collection<?> c) {
-        return false;
+        throw new java.lang.UnsupportedOperationException();
     }
 
     @Override
@@ -200,31 +196,39 @@ public class DoppeltVerketteteListe <E> implements List<E> {
         if(index < 0 || index > size){
             throw new IndexOutOfBoundsException();
         }
-
-        Node<E> currentNode = head;
-        for(int i = 0; i < index; i++){
-            currentNode = currentNode.getNext();
+        if(element == null){
+            throw new NullPointerException();
         }
-        if(currentNode == null){
-            tail.setNext(new Node<E>(element, null, tail));
-            tail = currentNode;
+
+        Node<E> newNode;
+
+        if(size == 0){
+            newNode = new Node<>(element, null, null);
+            head = newNode;
+            tail = newNode;
+        }
+        else if(index == size){
+            newNode = new Node<>(element, null, tail);
+            tail = newNode;
         }
         else{
+            Node<E> currentNode = head;
+            for(int i = 0; i < index; i++){
+                currentNode = currentNode.getNext();
+            }
+
             Node<E> previous = currentNode.getPrevious();
-            Node<E> next = currentNode.getNext();
-            new Node<>(element, next, previous);
-            if(previous != null) {
-                previous.setNext(next);
-            }
-            if(next != null) {
-                next.setPrevious(previous);
-            }
+            newNode = new Node<>(element, currentNode, previous);
+            previous.setNext(newNode);
+            currentNode.setPrevious(newNode);
         }
+
+        size++;
     }
 
     @Override
     public E remove(int index) {
-        if(index < 0 || index > size){
+        if(index < 0 || index >= size){
             throw new IndexOutOfBoundsException();
         }
 
@@ -242,21 +246,19 @@ public class DoppeltVerketteteListe <E> implements List<E> {
             next.setPrevious(previous);
         }
 
+        size--;
         return currentNode.getValue();
     }
 
     @Override
     public int indexOf(Object o) {
-        Node<E> currentNode = head;
-        int index = 0;
 
-        while(currentNode != null){
-            if(currentNode.getValue().equals(o)){
+        int index = 0;
+        for(E item: this){
+            if(item.equals(o)){
                 return index;
             }
-
             index++;
-            currentNode = currentNode.getNext();
         }
 
         return -1;
@@ -264,12 +266,12 @@ public class DoppeltVerketteteListe <E> implements List<E> {
 
     @Override
     public int lastIndexOf(Object o) {
-        return 0;
+        throw new java.lang.UnsupportedOperationException();
     }
 
     @Override
     public ListIterator<E> listIterator() {
-        return null;
+        throw new java.lang.UnsupportedOperationException();
     }
 
     @Override
@@ -279,12 +281,95 @@ public class DoppeltVerketteteListe <E> implements List<E> {
 
     @Override
     public List<E> subList(int fromIndex, int toIndex) {
-        return null;
+        throw new java.lang.UnsupportedOperationException();
     }
 
-    public static void main(String[] args) {
-        DoppeltVerketteteListe<String> dp = new DoppeltVerketteteListe<>();
-        dp.add("Hallo");
-        dp.toArray(new String[0]);
+    private class DVLIterator implements Iterator<E>{
+        protected Node<E> iteratorPos;
+        protected Node<E> lastIteratorPos;
+        protected int index;
+        protected int lastIndex;
+
+        public DVLIterator(){
+            this.iteratorPos = head;
+            this.lastIteratorPos = null;
+            this.index = 0;
+            this.lastIndex = -1;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return iteratorPos != null;
+        }
+
+        @Override
+        public E next() {
+            if(hasNext()){
+                E value = iteratorPos.getValue();
+                lastIteratorPos = iteratorPos;
+                iteratorPos = iteratorPos.getNext();
+                lastIndex = index;
+                index++;
+
+                return value;
+            }
+
+            throw new NoSuchElementException();
+        }
+
+        @Override
+        public void remove(){
+            if(lastIndex == -1 || lastIteratorPos == null){
+                throw new IllegalArgumentException();
+            }
+            DoppeltVerketteteListe.this.remove(lastIndex);
+            lastIndex = -1;
+            lastIteratorPos = null;
+        }
+    }
+
+    private class DVLListIterator extends DVLIterator implements ListIterator<E>{
+
+        @Override
+        public boolean hasPrevious() {
+            return iteratorPos.getPrevious() != null;
+        }
+
+        @Override
+        public E previous() {
+            if(hasPrevious()){
+                E value = iteratorPos.getValue();
+                iteratorPos = iteratorPos.getPrevious();
+                index--;
+
+                return value;
+            }
+
+            throw new NoSuchElementException();
+        }
+
+        @Override
+        public int nextIndex() {
+            return index == size ? size : index + 1;
+        }
+
+        @Override
+        public int previousIndex() {
+            return index - 1;
+        }
+
+        @Override
+        public void set(E e) {
+            if(lastIndex == -1 || lastIteratorPos == null){
+                throw new IllegalArgumentException();
+            }
+
+            lastIteratorPos.setValue(e);
+        }
+
+        @Override
+        public void add(E e) {
+            DoppeltVerketteteListe.this.add(index, e);
+        }
     }
 }
