@@ -48,6 +48,7 @@ public class DoppeltVerketteteListe <E> implements List<E> {
         throw new java.lang.UnsupportedOperationException();
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public <T> T[] toArray(T[] a) {
         if(a == null){
@@ -70,7 +71,7 @@ public class DoppeltVerketteteListe <E> implements List<E> {
 
         }
         catch(Exception e){
-            throw new ArrayStoreException();
+            throw new ArrayStoreException(e.getMessage());
         }
 
         return a;
@@ -276,7 +277,7 @@ public class DoppeltVerketteteListe <E> implements List<E> {
 
     @Override
     public ListIterator<E> listIterator(int index) {
-        return null;
+        return new DVLListIterator();
     }
 
     @Override

@@ -7,8 +7,10 @@ import java.util.List;
 import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
 
+@SuppressWarnings("all")
 public class DoppeltVerketteteListeTest {
 
+    
     @Test
     public void testSizeEmptyList() {
         List<Integer> list = new DoppeltVerketteteListe<>();
@@ -34,12 +36,14 @@ public class DoppeltVerketteteListeTest {
         assertEquals(2, list.size());
     }
 
+    
     @Test
     public void testIsEmptyEmptyList() {
         List<Integer> list = new DoppeltVerketteteListe<>();
         assertTrue(list.isEmpty());
     }
 
+    
     @Test
     public void testIsEmptyNonEmptyList() {
         List<Integer> list = new DoppeltVerketteteListe<>();
@@ -47,6 +51,7 @@ public class DoppeltVerketteteListeTest {
         assertFalse(list.isEmpty());
     }
 
+    
     @Test
     public void testIsEmptyAfterClear() {
         List<Integer> list = new DoppeltVerketteteListe<>();
@@ -88,6 +93,7 @@ public class DoppeltVerketteteListeTest {
         assertEquals("C", array[2]);
     }
 
+    
     @Test
     public void testToArrayEmptyList() {
         List<Integer> list = new DoppeltVerketteteListe<>();
@@ -96,6 +102,19 @@ public class DoppeltVerketteteListeTest {
         array = list.toArray(array);
 
         assertEquals(0, array.length);
+    }
+
+    
+    @Test
+    public void testToArrayWrongCast(){
+        List<String> list = new DoppeltVerketteteListe<>();
+        list.add("A");
+        list.add("B");
+        List maliciousList = list;
+        maliciousList.add(3);
+
+        String array [] = new String[3];
+        assertThrows(ArrayStoreException.class, () -> list.toArray(array));
     }
 
     @Test
@@ -121,6 +140,7 @@ public class DoppeltVerketteteListeTest {
         assertEquals(3, list.size());
     }
 
+    
     @Test
     public void testAddAtIndex() {
         List<String> list = new DoppeltVerketteteListe<>();
@@ -179,6 +199,7 @@ public class DoppeltVerketteteListeTest {
         assertTrue(list.contains(3));
     }
 
+    
     @Test
     public void testAddAllEmptyCollection() {
         List<Integer> list = new DoppeltVerketteteListe<>();
@@ -187,6 +208,7 @@ public class DoppeltVerketteteListeTest {
         assertEquals(0, list.size());
     }
 
+    
     @Test
     public void testAddAllNullCollection() {
         List<Integer> list = new DoppeltVerketteteListe<>();
@@ -194,6 +216,7 @@ public class DoppeltVerketteteListeTest {
         assertEquals(0, list.size());
     }
 
+    
     @Test
     public void testClear() {
         List<Integer> list = new DoppeltVerketteteListe<>();
@@ -205,6 +228,7 @@ public class DoppeltVerketteteListeTest {
         assertTrue(list.isEmpty());
     }
 
+    
     @Test
     public void testClearEmptyList() {
         List<Integer> list = new DoppeltVerketteteListe<>();
@@ -224,6 +248,7 @@ public class DoppeltVerketteteListeTest {
         assertEquals("C", list.get(2));
     }
 
+    
     @Test(expected = IndexOutOfBoundsException.class)
     public void testGetInvalidIndex() {
         List<String> list = new DoppeltVerketteteListe<>();
