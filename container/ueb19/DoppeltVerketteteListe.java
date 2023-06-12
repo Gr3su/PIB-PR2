@@ -3,28 +3,52 @@ package ueb19;
 import java.lang.reflect.Array;
 import java.util.*;
 
+/**
+ * Doppelt verkettete Liste, die ihre Werte als Objekte der Klasse Node speichert.
+ *
+ * @param <E> Oberklasse der zu speichernden Werte
+ */
 public class DoppeltVerketteteListe <E> implements List<E> {
 
     private Node<E> head;
     private Node<E> tail;
     private int size;
 
+    /**
+     * Initialisierung der Liste.
+     */
     public DoppeltVerketteteListe(){
         this.head = null;
         this.tail = null;
         this.size = 0;
     }
 
+    /**
+     * Gibt die aktuelle Anzahl an Elementen in der Liste zurueck.
+     *
+     * @return size
+     */
     @Override
     public int size() {
         return size;
     }
 
+    /**
+     * Ob Liste aktuell keine Elemente enthaelt.
+     *
+     * @return Liste leer (true) - Liste befuellt (false)
+     */
     @Override
     public boolean isEmpty() {
         return size == 0;
     }
 
+    /**
+     * Gibt zurueck ob Element in Liste enthalten.
+     *
+     * @param o Instanz die gesucht werden soll.
+     * @return Ob Instanz enthalten
+     */
     @Override
     public boolean contains(Object o) {
 
@@ -37,6 +61,11 @@ public class DoppeltVerketteteListe <E> implements List<E> {
         return false;
     }
 
+    /**
+     * Einfacher Iterator.
+     *
+     * @return Iterator
+     */
     @Override
     public Iterator<E> iterator() {
 
@@ -48,6 +77,18 @@ public class DoppeltVerketteteListe <E> implements List<E> {
         throw new java.lang.UnsupportedOperationException();
     }
 
+    /**
+     * Erstellt mit den Elementen der Liste ein Array.
+     *
+     * @param a Das Array in das die Elemente der List gespeichert werden, wenn es gross genug ist.
+     *          Ansonsten wird eins mit dem selben Runtime Type und der passenden groesse erstellt.
+     *
+     * @return Array mit den Elementen der Liste
+     * @param <T> Typ des Arrays
+     *
+     * @throws NullPointerException Wenn Array gleich null ist
+     * @throws ArrayStoreException Wenn Fehler beim erstellen des Arrays auftritt
+     */
     @SuppressWarnings("unchecked")
     @Override
     public <T> T[] toArray(T[] a) {
@@ -77,6 +118,14 @@ public class DoppeltVerketteteListe <E> implements List<E> {
         return a;
     }
 
+    /**
+     * Fuegt ein Element ans Ende der Liste an.
+     *
+     * @param e Element das angehangen werden soll.
+     * @return Immer true, da Element immer angehangen wird und sich Liste somit aendert.
+     *
+     * @throws NullPointerException Wenn Element null ist
+     */
     @Override
     public boolean add(E e) {
         if(e == null){
@@ -99,6 +148,14 @@ public class DoppeltVerketteteListe <E> implements List<E> {
         return true;
     }
 
+    /**
+     * Loescht erstes Erscheinen eines ELement aus der Liste.
+     *
+     * @param o Zu loeschendes Element
+     * @return Element gefunden und geloescht (true) sonst (false)
+     *
+     * @throws NullPointerException Wenn Objekt null ist
+     */
     @Override
     public boolean remove(Object o) {
         if(o == null){
@@ -122,6 +179,14 @@ public class DoppeltVerketteteListe <E> implements List<E> {
         throw new java.lang.UnsupportedOperationException();
     }
 
+    /**
+     * Fuegt alle Elemente einer uebergebenen Collection zur Liste hinzu.
+     *
+     * @param c Collection mit den hinzuzufuegenden Elementen
+     * @return Wenn Elemente hinzugefuegt (true) sonst (false)
+     *
+     * @throws NullPointerException Wenn ein Element aus Collecction null ist
+     */
     @Override
     public boolean addAll(Collection<? extends E> c) {
         if(c == null || c.size() == 0){
@@ -153,6 +218,9 @@ public class DoppeltVerketteteListe <E> implements List<E> {
         throw new java.lang.UnsupportedOperationException();
     }
 
+    /**
+     * Leert die Liste.
+     */
     @Override
     public void clear() {
         head = null;
@@ -160,6 +228,14 @@ public class DoppeltVerketteteListe <E> implements List<E> {
         size = 0;
     }
 
+    /**
+     * Gibt das Element an Stelle index zurueck.
+     *
+     * @param index Index des Elements
+     * @return Gefundenes Element
+     *
+     * @throws IndexOutOfBoundsException Wenn Index <0 oder >=Anzahl der Elemente
+     */
     @Override
     public E get(int index) {
         if(index < 0 || index >= size){
@@ -174,6 +250,15 @@ public class DoppeltVerketteteListe <E> implements List<E> {
         return currentNode.getValue();
     }
 
+    /**
+     * Aendert Element an Stelle index.
+     *
+     * @param index index des zu ersetzenden Elements
+     * @param element Element das gespeichert werden soll
+     * @return vorheriges Element an Stelle index
+     *
+     * @throws IndexOutOfBoundsException Wenn index <0 oder >=Anzahl der Elemente
+     */
     @Override
     public E set(int index, E element) {
         if(index < 0 || index >= size){
@@ -192,6 +277,15 @@ public class DoppeltVerketteteListe <E> implements List<E> {
         return previousValue;
     }
 
+    /**
+     * Fuegt Element an Stelle index neu ein.
+     *
+     * @param index index wo Element eingefuegt werden soll
+     * @param element element das gespeichert werden soll
+     *
+     * @throws IndexOutOfBoundsException Wenn index <0 oder >Anzahl der Elemente
+     * @throws NullPointerException Wenn element null ist
+     */
     @Override
     public void add(int index, E element) {
         if(index < 0 || index > size){
@@ -227,6 +321,12 @@ public class DoppeltVerketteteListe <E> implements List<E> {
         size++;
     }
 
+    /**
+     * Entfernt den Knoten an Stelle index
+     *
+     * @param index index vom zu loeschenden Element
+     * @return Wert des geloeschten Knoten
+     */
     @Override
     public E remove(int index) {
         if(index < 0 || index >= size){
@@ -251,6 +351,12 @@ public class DoppeltVerketteteListe <E> implements List<E> {
         return currentNode.getValue();
     }
 
+    /**
+     * Sucht Element und gibt seinen Index zurueck.
+     *
+     * @param o Element das gesucht werden soll
+     * @return Index des Elements
+     */
     @Override
     public int indexOf(Object o) {
 
