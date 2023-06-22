@@ -4,11 +4,11 @@ import ueb18.Artikel;
 import ueb18.ErrorMessages;
 import ueb18.FehlerPruefung;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
+import java.util.*;
 import java.util.function.BiPredicate;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 /**
  * Klasse zum Lagern und Verwalten von Artikel Objekten.
@@ -40,7 +40,7 @@ public class Lager {
         FehlerPruefung.fehlerPruefung(  ErrorMessages.ERROR_LAGER_LAGERGROESSE_MUSS_GROESSER,
                 lagerGroesse);
 
-        this.lagerFeld = new LinkedHashMap<>();
+        this.lagerFeld = new LinkedHashMap<>(lagerGroesse);
         this.lagerGroesse = lagerGroesse;
         this.lagerBestand = 0;
     }
@@ -132,11 +132,7 @@ public class Lager {
      * @param prozent Der Prozentsatz um den der Preis geeandert wird.
      */
     public void aenderePreisAllerArtikel(double prozent){
-        for(Artikel tmp: lagerFeld){
-            if(tmp != null){
-                tmp.aenderePreis(prozent);
-            }
-        }
+        lagerFeld.forEach((k ,v) -> v.aenderePreis(prozent));
     }
 
     /**
@@ -158,7 +154,7 @@ public class Lager {
         ausgabe.append(String.format("|%-5s %-40s %8s %-7s %9s  |\n", "ArtNr", "Beschreibung", "Preis",
                 "Bestand", "Gesamt"));
         ausgabe = ausgabe.append("|---------------------------------------------------------------------------|\n");
-        for(Artikel artikel: lagerFeld){
+        for(Artikel artikel: lagerFeld.values()){
             if(artikel != null){
                 artikelPreis = artikel.getPreis();
                 artikelNr = artikel.getArtikelNr();
@@ -196,8 +192,11 @@ public class Lager {
         if(index < 0 || index > lagerGroesse - 1){
             throw new IllegalArgumentException(ErrorMessages.ERROR_LAGER_INDEX_FALSCH + String.valueOf(lagerGroesse - 1));
         }
-
-        return lagerFeld[index];
+        Iterator<Artikel> iterator = lagerFeld.values().iterator();
+        for(int i = 0; i < index; i++){
+            iterator.next();
+        }
+        return iterator.next();
     }
 
     /**
@@ -205,7 +204,7 @@ public class Lager {
      *
      * @return Lager
      */
-    public Artikel[] getLager(){
+    public LinkedHashMap<Integer, Artikel> getLager(){
         return lagerFeld;
     }
 
@@ -220,7 +219,7 @@ public class Lager {
     @Override
     public String toString(){
         String lager = ";\nLagerFeld:\n";
-        for(Artikel tmp: lagerFeld){
+        for(Artikel tmp: lagerFeld.values()){
             if(tmp != null){
                 lager += "Klasse: " + tmp.getClass().getSimpleName() + " : " + tmp + "\n";
             }
@@ -238,13 +237,9 @@ public class Lager {
      * @return true wenn Artikel gefunden, false wenn Artikel nicht gefunden.
      */
     private boolean istArtikelGelagert(Artikel artikel){
-        for(int i = 0; i < lagerBestand; i++){
-            if(lagerFeld[i].getArtikelNr() == artikel.getArtikelNr()){
-                return true;
-            }
-            if(lagerFeld[i].equals(artikel)){
-                return true;
-            }
+        if(lagerFeld.containsKey(artikel.getArtikelNr()) &&
+            lagerFeld.get(artikel.getArtikelNr()).equals(artikel)){
+            return true;
         }
 
         return false;
@@ -262,14 +257,19 @@ public class Lager {
      */
     public int getIndexArtikel(int artikelNr){
         int index;
+        Iterator<Artikel> iterator = lagerFeld.values().iterator();
+        if(!lagerFeld.containsKey(artikelNr)){
+            throw new IllegalArgumentException(ErrorMessages.ERROR_LAGER_ARTIKEL_NICHT_GEFUNDEN.getMessage());
+        }
+
         for(int i = 0; i < lagerBestand; i++){
-            if(lagerFeld[i].getArtikelNr() == artikelNr){
+            if(iterator.next().getArtikelNr() == artikelNr){
                 index = i;
                 return index;
             }
         }
 
-        throw new IllegalArgumentException(ErrorMessages.ERROR_LAGER_ARTIKEL_NICHT_GEFUNDEN.getMessage());
+        return 0;
     }
 
     /**
@@ -280,6 +280,9 @@ public class Lager {
      * @return Das sortierte Lager wird zurueck gegeben.
      */
     public Artikel[] getSorted(BiPredicate<Artikel, Artikel> sortierKriterium){
+        Stream<Artikel> stream = lagerFeld.values().stream();
+        return (Artikel[])stream.sorted((o1, o2) -> sortierKriterium.test(o1, o2) ? 1 : -1).toArray();
+/*
         int sortiertGroesse = getLagerBestand();
         Artikel[] sortiertesLager = lagerFeld.clone();
 
@@ -294,7 +297,7 @@ public class Lager {
             }
         }
 
-        return sortiertesLager;
+        return sortiertesLager;*/
     }
 
     /**
@@ -303,9 +306,7 @@ public class Lager {
      * @param operation Operation die auf alle Artikel im Lager angewendet werden soll.
      */
     public void applyToArticles(Consumer<Artikel> operation){
-        for(int i = 0; i < getLagerBestand(); i++){
-            operation.accept(lagerFeld[i]);
-        }
+        lagerFeld.values().forEach(operation);
     }
 
     /**
@@ -316,6 +317,8 @@ public class Lager {
      * @return Gefiltertes Array
      */
     public Artikel[] filterAnwendung(Predicate<Artikel> filterKriterium, Artikel[] array){
+        return (Artikel[])Arrays.stream(array).filter(filterKriterium).toArray();
+        /*
         ArrayList<Artikel> filteredArrayList = new ArrayList<>();
 
         for(int i = 0; i < array.length; i++){
@@ -328,6 +331,7 @@ public class Lager {
         }
 
         return filteredArrayList.toArray(new Artikel[0]);
+         */
     }
 
     /**
@@ -338,9 +342,7 @@ public class Lager {
      * @return Array mit den Artikeln die den Filter erfuellen.
      */
     public Artikel[] filter(Predicate<Artikel> filterKriterium){
-        ArrayList<Artikel> filteredArray = new ArrayList<>();
-
-        return filterAnwendung(filterKriterium, lagerFeld);
+        return (Artikel[]) lagerFeld.values().stream().filter(filterKriterium).toArray();
     }
 
     /**
@@ -386,6 +388,6 @@ public class Lager {
             alleKriterien = alleKriterien.and(kriterium);
         }
 
-        return filterAnwendung(alleKriterien, lagerFeld);
+        return (Artikel[]) lagerFeld.values().stream().filter(alleKriterien).toArray();
     }
 }
