@@ -165,6 +165,28 @@ public class DoppeltVerketteteListeTest {
     }
 
     @Test
+    public void testRemoveHead(){
+        List<Integer> list = new DoppeltVerketteteListe<>();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.remove(0);
+        assertEquals(new Integer(2), list.get(0));
+        assertEquals(new Integer(3), list.get(1));
+    }
+
+    @Test
+    public void testRemoveTail(){
+        List<Integer> list = new DoppeltVerketteteListe<>();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.remove(2);
+        assertEquals(new Integer(1), list.get(0));
+        assertEquals(new Integer(2), list.get(1));
+    }
+
+    @Test
     public void testRemoveExistingElement() {
         List<Integer> list = new DoppeltVerketteteListe<>();
         list.add(1);

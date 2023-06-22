@@ -343,8 +343,14 @@ public class DoppeltVerketteteListe <E> implements List<E> {
         if(previous != null){
             previous.setNext(next);
         }
+        else{
+            head = next;
+        }
         if(next != null){
             next.setPrevious(previous);
+        }
+        else{
+            tail = previous;
         }
 
         size--;
