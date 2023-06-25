@@ -17,7 +17,7 @@ public class ProcessNumbers {
         }
     }
 
-    public Collection<Integer> getQueue(){
+    public Queue<Integer> getQueue(){
         return queue;
     }
 
@@ -46,7 +46,7 @@ public class ProcessNumbers {
             }
             else {
 
-                Integer value = ((PriorityQueue<Integer>) processNumbers.getQueue()).poll() ;
+                Integer value =  processNumbers.getQueue().poll() ;
                 if(value == null){
                     continue;
                 }
