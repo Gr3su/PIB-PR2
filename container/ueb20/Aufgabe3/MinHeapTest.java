@@ -8,13 +8,13 @@ import org.junit.jupiter.api.Test;
 public class MinHeapTest {
     @Test
     public void testPeekWithEmptyHeap() {
-        MinHeap<Integer> heap = new MinHeap<Integer>(Integer.class, 10);
-        assertEquals(null, heap.peek());
+        MinHeap<Integer> heap = new MinHeap<>(Integer.class, 10);
+        assertNull(heap.peek());
     }
 
     @Test
     public void testPeekWithNonEmptyHeap() {
-        MinHeap<Integer> heap = new MinHeap<Integer>(Integer.class, 10);
+        MinHeap<Integer> heap = new MinHeap<>(Integer.class, 10);
         heap.offer(5);
         heap.offer(10);
         heap.offer(3);
@@ -23,7 +23,7 @@ public class MinHeapTest {
 
     @Test
     public void testPeekDoesNotRemoveElement() {
-        MinHeap<Integer> heap = new MinHeap<Integer>(Integer.class, 10);
+        MinHeap<Integer> heap = new MinHeap<>(Integer.class, 10);
         heap.offer(5);
         heap.offer(10);
         heap.offer(3);
@@ -34,7 +34,7 @@ public class MinHeapTest {
     @Test
     public void testPollWithEmptyHeap() {
         MinHeap<Integer> heap = new MinHeap<>(Integer.class, 10);
-        assertEquals(null, heap.poll());
+        assertNull(heap.poll());
     }
 
     @Test
