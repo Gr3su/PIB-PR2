@@ -1,6 +1,8 @@
 package ueb20.Aufgabe3;
 
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Queue;
@@ -17,13 +19,13 @@ public class MinHeap<E  extends Comparable<E>> implements Queue<E> {
     private int size;
 
     @SuppressWarnings({"unchecked"})
-    public MinHeap(int heapGroesse){
-        this.minHeap = (E []) new Object[heapGroesse];
+    public MinHeap(Class<E> tClass, int heapGroesse){
+        this.minHeap = (E []) Array.newInstance(tClass, heapGroesse);
         this.size = 0;
     }
 
-    public MinHeap(){
-        this(STANDARD_GROESSE);
+    public MinHeap(Class<E> tClass){
+        this(tClass, STANDARD_GROESSE);
     }
 
     @Override
@@ -36,15 +38,15 @@ public class MinHeap<E  extends Comparable<E>> implements Queue<E> {
         if(size == minHeap.length){
             return false;
         }
-        int insertPos = size;
-        minHeap[size++] = e;
 
-        while(  insertPos != 0 &&
-                minHeap[(insertPos-1) / 2].compareTo(e) >= 0){
-            E storeValue = minHeap[(insertPos-1) / 2];
-            minHeap[(insertPos - 1) / 2] = minHeap[insertPos];
-            minHeap[insertPos] = storeValue;
-            insertPos = (insertPos - 1) / 2;
+        minHeap[size++] = e;
+        int index = size - 1;
+        int parentIndex = (index-1)/2;
+
+        while(index != 0 &&
+                minHeap[index].compareTo(minHeap[parentIndex]) < 0){
+            swap(index, parentIndex);
+            index = parentIndex;
         }
 
         return true;
@@ -57,12 +59,37 @@ public class MinHeap<E  extends Comparable<E>> implements Queue<E> {
         }
 
         E storeValue = minHeap[0];
-        minHeap[0] = minHeap[size];
+        minHeap[0] = minHeap[size - 1];
         minHeap[size--] = null;
         int index = 0;
+        int swapIndex = 0;
 
-        while(  index*2+1 < minHeap.length &&
-                index*2+2 < minHeap.length &&)
+        while(true){
+            int leftChildIndex = 2 * index + 1;
+            int rightChildIndex = 2 * index + 2;
+
+            if(leftChildIndex < size &&
+                minHeap[leftChildIndex].compareTo(minHeap[index]) < 0){
+                swapIndex = leftChildIndex;
+            }
+            if(rightChildIndex < size &&
+                minHeap[rightChildIndex].compareTo(minHeap[index]) < 0 &&
+                minHeap[rightChildIndex].compareTo(minHeap[leftChildIndex]) > 0){
+                swapIndex = rightChildIndex;
+            }
+            if(swapIndex == index){
+                break;
+            }
+            swap(index, swapIndex);
+            index = swapIndex;
+        }
+        return storeValue;
+    }
+
+    public void swap(int a, int b){
+        E storeValue = minHeap[a];
+        minHeap[a] = minHeap[b];
+        minHeap[b] = storeValue;
     }
 
     @Override
@@ -82,7 +109,7 @@ public class MinHeap<E  extends Comparable<E>> implements Queue<E> {
 
     @Override
     public int size() {
-        throw new UnsupportedOperationException(ERROR_UNSUPPORTED_OP);
+        return size;
     }
 
     @Override

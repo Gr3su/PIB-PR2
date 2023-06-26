@@ -1,8 +1,6 @@
 package ueb20.Aufgabe2;
 
 
-import ueb18.Artikel;
-
 /**
  * Abarbeitung der auftretenden Fehler.
  *

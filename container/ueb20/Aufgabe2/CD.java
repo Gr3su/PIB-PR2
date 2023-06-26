@@ -1,10 +1,5 @@
 package ueb20.Aufgabe2;
 
-
-import ueb18.Artikel;
-import ueb18.ErrorMessages;
-import ueb18.FehlerPruefung;
-
 /**
  * CD Klasse die von Artikel erbt.
  *

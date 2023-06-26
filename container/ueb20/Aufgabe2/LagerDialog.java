@@ -1,10 +1,5 @@
 package ueb20.Aufgabe2;
 
-import ueb18.Artikel;
-import ueb18.ErrorMessages;
-import ueb18.FehlerPruefung;
-import ueb18.Lager;
-
 import java.util.Scanner;
 
 /**
@@ -17,7 +12,7 @@ import java.util.Scanner;
 public class LagerDialog{
     //Attribute
     private static Scanner scanner      = new Scanner(System.in);
-    private static ueb18.Lager lager          = null;
+    private static Lager lager          = null;
     private static boolean killProgram  = false;
 
     private LagerDialog(){}
@@ -145,7 +140,7 @@ public class LagerDialog{
      *
      * @throws IllegalArgumentException Wenn etwas anderes als 1 oder 2 eingegeben wurde.
      */
-    private final ueb18.Lager erstelleLager(){
+    private final Lager erstelleLager(){
         byte konstruktorWahl = leseByte("Moechtest du eine Lagergroesse vorgeben? (Bei Nein: Groesse = 10) (1:Ja / 2:Nein)\nEingabe:");
 
         FehlerPruefung.fehlerPruefung(  ErrorMessages.ERROR_LAGERDIALOG_OPTION_NUMMER_BIS_2,
@@ -153,7 +148,7 @@ public class LagerDialog{
 
         if(konstruktorWahl == 1){
             int lagerGroesse = leseInt("Die Lagergroesse: ");
-            return new ueb18.Lager(lagerGroesse);
+            return new Lager(lagerGroesse);
         }
 
         return new Lager();
@@ -166,7 +161,7 @@ public class LagerDialog{
      *
      * @throws IllegalArgumentException Wenn etwas anderes als Ja oder Nein eingegeben wurde.
      */
-    private final static ueb18.Artikel erstelleArtikel(){
+    private final static Artikel erstelleArtikel(){
         byte artikelWahl = leseByte("Welchen Artikel moechtest du erstellen:\n" +
                 "1 - CD\n" +
                 "2 - Buch\n" +
@@ -189,7 +184,7 @@ public class LagerDialog{
         return erstelleAllgemeinenArtikel();
     }
 
-    private static ueb18.Artikel erstelleAllgemeinenArtikel(){
+    private static Artikel erstelleAllgemeinenArtikel(){
         byte konstruktorWahl = leseByte("Welcher Konstruktor soll aufgerufen werden:\n" +
                 "1 - Hauptkonstruktor\n" +
                 "2 - ohne Bestand\n" +
@@ -205,13 +200,13 @@ public class LagerDialog{
             int bestand = leseInt("Der Bestand: ");
             double preis = leseDouble("Der Preis: ");
 
-            return new ueb18.Artikel(artikelNr, art, bestand, preis);
+            return new Artikel(artikelNr, art, bestand, preis);
         }
 
         if(konstruktorWahl == 2){
             double preis = leseDouble("Der Preis: ");
 
-            return new ueb18.Artikel(artikelNr, art, preis);
+            return new Artikel(artikelNr, art, preis);
         }
 
         return new Artikel(artikelNr, art);
