@@ -27,7 +27,7 @@ public class ProcessNumbers {
         if(args[0].equalsIgnoreCase("fifo")){
             fifo = true;
         }
-        else if(args[0].equalsIgnoreCase("sort")){
+        else if(args[0].equalsIgnoreCase("prio")){
             fifo = false;
         }
         else{
@@ -47,6 +47,7 @@ public class ProcessNumbers {
             else {
 
                 Integer value =  processNumbers.getQueue().poll() ;
+                System.out.println("Entnommener Wert: " + value);
                 if(value == null){
                     continue;
                 }

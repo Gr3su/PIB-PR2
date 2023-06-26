@@ -2,11 +2,15 @@ package ueb20.Aufgabe3;
 
 
 import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Queue;
 
+/**
+ * Implementierung eines MinHeaps mit einem Array fester Groesse.
+ *
+ * @param <E> Type der zu speichernden Elemente
+ */
 public class MinHeap<E  extends Comparable<E>> implements Queue<E> {
     //Error-Messages
     private static final String ERROR_UNSUPPORTED_OP = "Methode nicht unterstuetzt.";
@@ -18,21 +22,42 @@ public class MinHeap<E  extends Comparable<E>> implements Queue<E> {
     private E [] minHeap;
     private int size;
 
+    /**
+     * Konstruktor der ein initiales Array erstellt.
+     *
+     * @param tClass Typ der Elemente
+     * @param heapGroesse Groesse des Arrays
+     */
     @SuppressWarnings({"unchecked"})
     public MinHeap(Class<E> tClass, int heapGroesse){
         this.minHeap = (E []) Array.newInstance(tClass, heapGroesse);
         this.size = 0;
     }
 
+    /**
+     * Standard-Konstruktor der ein Array der Groesse STANDARD_GROESSE erstellt.
+     *
+     * @param tClass Typ der Elemente
+     */
     public MinHeap(Class<E> tClass){
         this(tClass, STANDARD_GROESSE);
     }
 
+    /**
+     *
+     * @return Wurzel des MinHeap.
+     */
     @Override
     public E peek() {
         return minHeap[0];
     }
 
+    /**
+     * Fuegt ein Element in den MinHeap ein und stellt die MinHeap-Bedingungen wieder her.
+     *
+     * @param e the element to add
+     * @return true wenn hinzugefuegt, false wenn nicht
+     */
     @Override
     public boolean offer(E e) {
         if(size == minHeap.length){
@@ -52,6 +77,11 @@ public class MinHeap<E  extends Comparable<E>> implements Queue<E> {
         return true;
     }
 
+    /**
+     * Entfernt die Wurzel des MinHeap und sorgt dafuer dass die MinHeap-Bedingungen wiederhergestellt werden.
+     *
+     * @return Wurzel des MinHeap
+     */
     @Override
     public E poll() {
         if(size == 0){
@@ -86,7 +116,13 @@ public class MinHeap<E  extends Comparable<E>> implements Queue<E> {
         return storeValue;
     }
 
-    public void swap(int a, int b){
+    /**
+     * Hilfsmethode um die zwei Werte an Index a und b zu tauschen.
+     *
+     * @param a Index 1
+     * @param b Index 2
+     */
+    private void swap(int a, int b){
         E storeValue = minHeap[a];
         minHeap[a] = minHeap[b];
         minHeap[b] = storeValue;
@@ -107,6 +143,11 @@ public class MinHeap<E  extends Comparable<E>> implements Queue<E> {
         throw new UnsupportedOperationException(ERROR_UNSUPPORTED_OP);
     }
 
+    /**
+     * Gibt die Anzahl an Elementen im MinHeap zurueck
+     *
+     * @return Anzahl der Elemente
+     */
     @Override
     public int size() {
         return size;
