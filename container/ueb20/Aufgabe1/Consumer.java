@@ -69,7 +69,7 @@ public class Consumer {
      * @param value Quersumme von der die Haeufigkeit bestimmt werden soll
      * @return Haeufigkeit des Auftretens
      */
-    public int numberOfOccurences(int value){
+    public int numberOfOccurrences(int value){
         if (!occurenceCounter.containsKey(value)){
             return 0;
         }
@@ -88,7 +88,7 @@ public class Consumer {
      *
      * @return TreeSet das absteigend geordnet die Quersummen beinhaltet
      */
-    public TreeSet<Integer> getCrosstotalsDescending(){
+    public TreeSet<Integer> getCrossTotalsDescending(){
         TreeSet<Integer> sorted = new TreeSet<>(Collections.reverseOrder());
         sorted.addAll(checkSumMemory.keySet());
         return sorted;
