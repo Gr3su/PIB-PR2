@@ -1,6 +1,8 @@
-package ueb20.Aufgabe2;
+package ueb21.Aufgabe1;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.function.BiPredicate;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
@@ -277,7 +279,7 @@ public class Lager {
      */
     public Artikel[] getSorted(BiPredicate<Artikel, Artikel> sortierKriterium){
         Stream<Artikel> stream = lagerFeld.values().stream();
-        return stream.sorted((o1, o2) -> sortierKriterium.test(o1, o2) ? 1 : -1).toArray(Artikel[]::new);
+        return stream.sorted((o1, o2) -> sortierKriterium.test(o1, o2) ? -1 : 1).toArray(Artikel[]::new);
         /*
         int sortiertGroesse = getLagerBestand();
         Artikel[] sortiertesLager = lagerFeld.clone();
@@ -313,7 +315,7 @@ public class Lager {
      * @return Gefiltertes Array
      */
     public Artikel[] filterAnwendung(Predicate<Artikel> filterKriterium, Artikel[] array){
-        return (Artikel[])Arrays.stream(array).filter(filterKriterium).toArray();
+        return Arrays.stream(array).filter(filterKriterium).toArray(Artikel[]::new);
         /*
         ArrayList<Artikel> filteredArrayList = new ArrayList<>();
 
@@ -338,7 +340,7 @@ public class Lager {
      * @return Array mit den Artikeln die den Filter erfuellen.
      */
     public Artikel[] filter(Predicate<Artikel> filterKriterium){
-        return (Artikel[]) lagerFeld.values().stream().filter(filterKriterium).toArray();
+        return lagerFeld.values().stream().filter(filterKriterium).toArray(Artikel[]::new);
     }
 
     /**

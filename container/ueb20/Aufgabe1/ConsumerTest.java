@@ -29,7 +29,7 @@ class ConsumerTest {
         consumer = new Consumer();
         consumer.consume(12345);
 
-        assertEquals(1, consumer.numberOfOccurences(15));
+        assertEquals(1, consumer.numberOfOccurrences(15));
     }
 
     @Test
@@ -38,14 +38,14 @@ class ConsumerTest {
         consumer.consume(12345);
         consumer.consume(12345);
 
-        assertEquals(2, consumer.numberOfOccurences(15));
+        assertEquals(2, consumer.numberOfOccurrences(15));
     }
 
     @Test
     void consumer_numberOfOccurenzes_with_0_expected_0() {
         consumer = new Consumer();
 
-        assertEquals(0, consumer.numberOfOccurences(15));
+        assertEquals(0, consumer.numberOfOccurrences(15));
     }
 
     @Test
@@ -124,7 +124,7 @@ class ConsumerTest {
         expectedCrossTotals.add(24);
         expectedCrossTotals.add(6);
 
-        assertEquals(expectedCrossTotals, consumer.getCrosstotalsDescending());
+        assertEquals(expectedCrossTotals, consumer.getCrossTotalsDescending());
     }
 
     @Test
@@ -139,7 +139,7 @@ class ConsumerTest {
         expectedCrossTotals.add(-24);
         expectedCrossTotals.add(-6);
 
-        assertEquals(expectedCrossTotals, consumer.getCrosstotalsDescending());
+        assertEquals(expectedCrossTotals, consumer.getCrossTotalsDescending());
     }
 
     @Test
