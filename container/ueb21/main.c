@@ -49,13 +49,13 @@ int main() {
         skonto = 0.02 * bruttopreis;
 
         // Ausgabe der Ergebnisse
-        printf("Nettopreis             Euro %8.2f\n", nettopreis);
-        printf("+ 20%% MwSt             Euro %8.2f\n", mwst);
+        printf("%-15s%15s%8.2f\n", "Nettopreis", "Euro",nettopreis);
+        printf("%-15s%15s%8.2f\n", "+ 20%MwSt", "Euro", mwst);
         printf("%37s\n", "=====================================");
-        printf("Bruttopreis            Euro %8.2f\n", bruttopreis);
-        printf("- 2%% Skonto            Euro %8.2f\n", skonto);
+        printf("%-15s%15s%8.2f\n","Bruttopreis", "Euro", bruttopreis);
+        printf("%-15s%15s%8.2f\n","- 2% Skonto", "Euro", skonto);
         printf("%37s\n", "=====================================");
-        printf("Rechnungsbetrag        Euro %8.2f\n", bruttopreis - skonto);
+        printf("%-15s%15s%8.2f\n", "Rechnungsbetrag","Euro", bruttopreis - skonto);
 
         main();
         return 0;
@@ -187,4 +187,40 @@ int main() {
         main();
         return 0;
     }
+
+}
+
+int fibonacci(){
+    return 0;
+}
+
+/*
+ * Aufgabe 2:
+ * Berechnet zu einem eingegebenen Preis 20% Mehrwertsteuer dazu, zieht dann 2% Skonto ab und gibt jeden
+ * Rechnungsschritt formatiert aus.
+ */
+int bruttoRechner(){
+    double nettopreis, bruttopreis, mwst, skonto;
+
+    // Eingabe des Nettopreises
+    printf("Geben Sie den Nettopreis in Euro ein: ");
+    scanf("%lf", &nettopreis);
+
+    // Berechnung der Mehrwertsteuer
+    mwst = 0.2 * nettopreis;
+
+    // Berechnung des Bruttopreises
+    bruttopreis = nettopreis + mwst;
+
+    // Berechnung des Skontos
+    skonto = 0.02 * bruttopreis;
+
+    // Ausgabe der Ergebnisse
+    printf("%-15s%15s%8.2f\n", "Nettopreis", "Euro",nettopreis);
+    printf("%-15s%15s%8.2f\n", "+20%MwSt", "Euro", mwst);
+    printf("%37s\n", "=====================================");
+    printf("%-15s%15s%8.2f\n","Bruttopreis", "Euro", bruttopreis);
+    printf("%-15s%15s%8.2f\n","-2% Skonto", "Euro", skonto);
+    printf("%37s\n", "=====================================");
+    printf("%-15s%15s%8.2f\n", "Rechnungsbetrag","Euro", bruttopreis - skonto);
 }
