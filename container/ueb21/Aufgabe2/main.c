@@ -188,30 +188,30 @@ int minMaxFinder(void){
 
 
     unsigned char unsignedCharMax = 0;
-    printf("%-15s%15d","unsigned char", unsignedCharMax);
+    printf("%-15s%15u","unsigned char", unsignedCharMax);
     unsignedCharMax--;
-    printf("%15d\n",unsignedCharMax);
+    printf("%15u\n",unsignedCharMax);
 
 
     unsigned short unsignedShortMax = 0;
-    printf("%-15s%15d","unsigned short", unsignedShortMax);
+    printf("%-15s%15u","unsigned short", unsignedShortMax);
     unsignedShortMax--;
-    printf("%15d\n",unsignedShortMax);
+    printf("%15u\n",unsignedShortMax);
 
 
     unsigned int unsignedIntMax = 0;
-    printf("%-15s%15d","unsigned int", unsignedIntMax);
+    printf("%-15s%15u","unsigned int", unsignedIntMax);
     unsignedIntMax--;
-    printf("%15d\n", unsignedIntMax);
+    printf("%15u\n", unsignedIntMax);
 
     printf("\n%s\n","Aus limits-library:");
     printf("%-15s%15s%15s\n","Daten-Typ","Min-Wert","Max-Wert");
     printf("%-15s%15d%15d\n","char", CHAR_MIN, CHAR_MAX);
     printf("%-15s%15d%15d\n","short", SHRT_MIN, SHRT_MAX);
     printf("%-15s%15d%15d\n","int", INT_MIN, INT_MAX);
-    printf("%-15s%15d%15d\n","unsigned char", 0, UCHAR_MAX);
-    printf("%-15s%15d%15d\n","unsgined short", 0, USHRT_MAX);
-    printf("%-15s%15d%15d\n","unsgined int", 0, UINT_MAX);
+    printf("%-15s%15d%15u\n","unsigned char", 0, UCHAR_MAX);
+    printf("%-15s%15d%15u\n","unsgined short", 0, USHRT_MAX);
+    printf("%-15s%15d%15u\n","unsgined int", 0, UINT_MAX);
 
     return 0;
 }
