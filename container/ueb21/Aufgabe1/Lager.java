@@ -350,10 +350,7 @@ public class Lager {
      * @param operation Operation die auf Artikel ausgefuehrt wird
      */
     public void applyToSomeArticles(Predicate<Artikel> filterKriterium, Consumer<Artikel> operation){
-        Artikel[] gefiltertesLager = filter(filterKriterium);
-        for(int i = 0; i < gefiltertesLager.length; i++){
-            operation.accept(gefiltertesLager[i]);
-        }
+        lagerFeld.values().stream().filter(filterKriterium).forEach(operation);
     }
 
     /**
@@ -365,9 +362,7 @@ public class Lager {
      * @return Sortiertes Array mit den gewuenschten Artikeln
      */
     public Artikel[] getArticles(Predicate<Artikel> filterKriterium, BiPredicate <Artikel, Artikel> sortierKriterium){
-        Artikel[] sortiertesLager = getSorted(sortierKriterium);
-
-        return filterAnwendung(filterKriterium, sortiertesLager);
+        return lagerFeld.values().stream().filter(filterKriterium).sorted((o1, o2) -> sortierKriterium.test(o1, o2) ? -1 : 1).toArray(Artikel[]::new);
 
     }
 
@@ -386,6 +381,6 @@ public class Lager {
             alleKriterien = alleKriterien.and(kriterium);
         }
 
-        return (Artikel[]) lagerFeld.values().stream().filter(alleKriterien).toArray();
+        return (Artikel[]) lagerFeld.values().stream().filter(alleKriterien).toArray(Artikel[]::new);
     }
 }
